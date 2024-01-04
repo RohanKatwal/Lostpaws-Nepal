@@ -1,0 +1,51 @@
+
+<div class="dashboard-navbar">
+    <div class="nav-items">
+        <div class="items">
+            <div class="profile drop-menu" >
+                <a href="#" class="profile-pic" onclick="dropdown()">
+                    <img src="/<%=user.profileImage %>" alt="">
+                    <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <div class="dropdown">
+                    <div class="profile-img">
+                        <img src="/<%=user.profileImage %>" alt="">
+                        <div class="name">
+                            <h5><%=user.name %></h5>
+                            <p title="ro45@gmail.com"><%=user.email %></p>
+                        </div>
+                    </div>
+                    <%if(user.role=='admin'){%>
+                    <div class="profile-setting">
+                        <a href="/admin/setting" class="profile-items">
+                            <i class="fa-solid fa-gear"></i>
+                            Account Settings
+                        </a>
+                    </div>
+                    <div class="profile-setting">
+                        <a href="/logout" class="profile-items">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Log out
+                        </a>
+                    </div>
+                    <%}else{%>
+                    <div class="profile-setting">
+                        <a href="/dashboard/setting" class="profile-items">
+                            <i class="fa-solid fa-gear"></i>
+                            Account Settings
+                        </a>
+                    </div>
+                    <div class="profile-setting">
+                        <a href="/logout" class="profile-items">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Log out
+                        </a>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

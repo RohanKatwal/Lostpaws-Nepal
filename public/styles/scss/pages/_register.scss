@@ -1,0 +1,161 @@
+.registor-logo{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
+    justify-content: space-between;
+    p{
+        margin: 0 !important;
+        font-size: 14px;
+        color: #414A4C;
+        a{
+            color : #0A66C2;
+        }
+    }
+}
+
+.registor{
+    display: flex;
+    align-items: center;
+    .registor-info{
+        width: 50%;
+        display: grid;
+        place-content: center;
+        @media (min-width: 1440px){
+            height: calc( 100vh - 122px );
+        }
+        .registor-field{
+            width: 410px;
+            .heading1{
+                display: flex;
+                gap: 3px;
+                align-items: center;
+                justify-content: center;
+                h2{
+                    font-size: 28px;
+                    font-weight: 700;
+                    color: #414A4C;
+                    text-align: center;
+                    margin-bottom: 0;
+                }
+            }
+            p{
+                margin-top: 10px;
+                text-align: center;
+                color: #7E7E7E;
+            }
+            form{
+                margin-top: 25px;
+                .form-input{
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 25px;
+                    margin-top: 10px;
+                    label{
+                        font-size: 14px;
+                        color: #414A4C;
+                        margin-bottom: 10px;
+                    }
+                    input{
+                        border: 1px solid #BECAE3;
+                        border-radius: 5px;
+                        padding: 10px;
+                        width: 100%;
+                        &:focus-visible{
+                            outline: none;
+                        }
+    
+                        &::placeholder{
+                            color:#7E7E7E;
+                            color: 13px;
+                        }
+                    }
+                    .error{
+                        color: red;
+                        display: none;
+                        }
+                        .display-error {
+                            display: block;
+                            text-align: left;
+                            margin:0 !important;
+                    }
+                   
+                }
+                .password div{
+                    position: relative;
+                    img{
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+                .submit{
+                    margin-top: 40px;
+                    color: white;
+                    background-color: #0A66C2;
+                    width: 100%;
+                    padding: 13px 24px;
+                    border-radius: 5px;
+                    border:none;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-bottom: 20px;
+                    .loading{
+                        width: 21px;
+                        height: 21px;
+                        border: 4px solid #fff;
+                        border-radius: 50%;
+                        border-top: 4px solid #0A66C2;
+                        animation: spin 2s infinite linear;
+                      }
+                      
+                      @keyframes spin {
+                       to{
+                        transform: rotate(360deg);
+                       }
+                    }
+                }
+            }
+        }
+    }
+    .registor-side-img{
+        width: 50%;
+        background: url('/image/register.png') no-repeat;
+        background-size: cover;
+        position: fixed;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        padding-bottom: 50px;
+        .registor-quote{
+            background: linear-gradient(93.47deg, rgba(255, 255, 255, 0.1) -64.57%, rgba(0, 0, 0, 0) 122.55%);
+            backdrop-filter: blur(14px);
+            padding: 30px;
+            width: 90%;
+            border-radius: 10px;
+            position: relative;
+            &::before{
+                position: absolute;
+                content: '';
+                background: url('/styles/images/quotation.svg') no-repeat;
+                background-size: cover;
+                width: 90px;
+                height: 90px;
+                top: -35%;
+            }
+            p{
+                color: white;
+                font-size: 16px;
+                line-height: 26px;
+            }
+            .registor-author{
+                margin-top: 16px;
+            }
+        }
+    }
+}
