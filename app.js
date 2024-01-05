@@ -5,6 +5,7 @@ const User = require('./models/user')
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const app = express();
+const MongoStore = require('connect-mongo');
 
 app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,16 @@ mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch(error => console.error('Error connecting to MongoDB:', error));
+
+  app.use(session({
+    secret: 'my-secret-key',
+    resave: true,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_URI,
+        ttl: 24 * 60 * 60 // TTL (time-to-live) in seconds
+    })
+}));
 
   app.use(session({ secret: 'my-secret-key', resave: true, saveUninitialized: true }));
   app.use(passport.initialize());
