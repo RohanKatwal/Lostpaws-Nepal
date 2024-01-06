@@ -17,7 +17,9 @@ const userSchema = new mongoose.Schema({
     },
     password: {
       type: String,
-      required: true
+      required: function() {
+        return !this.googleId; // Password required if no Google ID exists
+    }
     },
     phoneNumber: String,
     profileImage: {
@@ -25,6 +27,11 @@ const userSchema = new mongoose.Schema({
         default: 'image/profile.png'
     },
     role: { type: String, default: "user" },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true // Allows null or unique values
+  },
     suspend: {type:Boolean,default:false},
     verificationCode:{type:String}
   }, {

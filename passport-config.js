@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
 const passport = require('passport');
 const User = require('./models/user');
+require('dotenv').config();
 
 passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     try {
