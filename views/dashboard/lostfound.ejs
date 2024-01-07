@@ -1,9 +1,279 @@
+
 <%- include("../components/head") %>
 <body>
     <%- include("../components/dashboard/sidebar") %>
     <main>
         <%- include("../components/dashboard/navbar") %>
+        <div class="dtitle">
+            <h1>Lost or Found a Pet?</h1>
+        </div>
+    <div class="lostfound">
+        <div class="container">
+            <form action="" class="lostform" enctype="multipart/form-data" id="lostform">
+                <div class="lostform-content">
+                    <div class="space">
+                        <label for="">Type <span style="color: red;">*</span></label>
+                        <select palceholder="Dog" id="type">
+                            <option value="Found">Found</option>
+                            <option value="Lost">Lost</option>
+                        </select>
+                    </div>
+                    <div class="space">
+                        <label for="">Pet <span style="color: red;">*</span></label>
+                        <select palceholder="Dog" id="pet">
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Bird">Bird</option>
+                            <option value="Rabbit">Rabbit</option>
+                            <option value="Hamster">Hamster</option>
+                            <option value="Horse">Horse</option>
+                        </select>
+                    </div>
+                    <div class="space">
+                        <label for="">Pet Name</label>
+                        <input id="petname" type="text" placeholder="Enter a pet name">
+                    </div>
+                    <div class="space">
+                        <label for="">Gender</label>
+                        <select palceholder="Male" id="gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="space">
+                        <label for="">Color</label>
+                        <input id="color" type="text" placeholder="Enter a pet Color">
+                    </div>
+                    <div class="space">
+                        <label for="">Age</label>
+                        <select palceholder="2 yrs" id="age">
+                            <option value="1-2">1-2 yrs</option>
+                            <option value="2-4">2-4 yrs</option>
+                            <option value="5-8">5-8 yrs</option>
+                            <option value="8-10">8-10 yrs</option>
+                            <option value="10+">10+ yrs</option>
+                        </select>
+                    </div>
+                    <div class="space">
+                        <label for="">Breed</label>
+                        <input id="breed" type="text" placeholder="Enter a pet breed">
+                    </div>
+                    <div class="space">
+                        <label for="">Size</label>
+                        <select palceholder="Small" id="size">
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Large">Large</option>
+                        </select>
+                    </div>
+                    <div class="space">
+                        <label for="">Date</label>
+                        <input id="date" type="date" placeholder="">
+                    </div>
+                </div>
+                <div class="lostform-content2">
+                    <div class="space2">
+                        <label for="">Location <span style="color: red;">*</span></label>
+                        <input id="location" type="text" placeholder="Enter a Location">
+                    </div>
+                    <div class="space2">
+                        <label for="">Reward</label>
+                        <select palceholder="No" id="reward">
+                            <option value="1000">1000 Npr</option>
+                            <option value="2000">2000 Npr</option>
+                            <option value="3000-5000">3000-5000 Npr</option>
+                            <option value="5000-10000">5000-10000 Npr</option>
+                            <option value="10+">10000+ Npr</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="map-content">
+                    <label for="">Point Precise Location on map</label>
+                    <div id="map" class="map"></div>
+                    <!-- <p id="coordinates"></p> -->
+                </div>
+                <div class="description">
+                    <label for="">Description <span style="color: red;">*</span></label>
+                    <textarea id="description" type="text"></textarea>
+                </div>
+                <div class="upload__box">
+                    <label for="">Upload pet image <span style="color: red;">*</span></label>
+                    <div class="upload__btn-box">
+                      <label class="upload__btn">
+                        <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M25 42C15.6 42 8 34.4 8 25C8 15.6 15.6 8 25 8C34.4 8 42 15.6 42 25C42 34.4 34.4 42 25 42ZM25 10C16.7 10 10 16.7 10 25C10 33.3 16.7 40 25 40C33.3 40 40 33.3 40 25C40 16.7 33.3 10 25 10Z" fill="#2D2D3D"/>
+                            <path d="M16 24H34V26H16V24Z" fill="#2D2D3D"/>
+                            <path d="M24 16H26V34H24V16Z" fill="#2D2D3D"/>
+                        </svg>
+                        <label>Add multiple image</label>
+                        <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+                      </label>
+                    </div>
+                    <div class="upload__img-wrap"></div>
+                  </div>
+                <div class="submit-cancel-btn">
+
+                    <button class="cancel-btn">Cancel</button>
+                    <button class="submit-btn" id="PostBtn" type="button" name="" value="">
+                        <div id="loading2" class="loading" style="display: none;"></div>
+                        <span id="noloading2" style="display: block;">Submit</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
     </main>
-    hi rohan
 </body>
+<script src="/js/dashboard/home.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    //preview image
+    jQuery(document).ready(function () {
+  ImgUpload();
+});
+
+function ImgUpload() {
+  var imgWrap = "";
+  var imgArray = [];
+
+  $('.upload__inputfile').each(function () {
+    $(this).on('change', function (e) {
+      imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+      var maxLength = $(this).attr('data-max_length');
+
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+      var iterator = 0;
+      filesArr.forEach(function (f, index) {
+
+        if (!f.type.match('image.*')) {
+          return;
+        }
+
+        if (imgArray.length > maxLength) {
+          return false
+        } else {
+          var len = 0;
+          for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i] !== undefined) {
+              len++;
+            }
+          }
+          if (len > maxLength) {
+            return false;
+          } else {
+            imgArray.push(f);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+              imgWrap.append(html);
+              iterator++;
+            }
+            reader.readAsDataURL(f);
+          }
+        }
+      });
+    });
+  });
+
+  $('body').on('click', ".upload__img-close", function (e) {
+    var file = $(this).parent().data("file");
+    for (var i = 0; i < imgArray.length; i++) {
+      if (imgArray[i].name === file) {
+        imgArray.splice(i, 1);
+        break;
+      }
+    }
+    $(this).parent().parent().remove();
+  });
+}
+    //Map
+    var map = L.map('map').setView([0, 0], 2);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    var marker;
+    var latitude, longitude;
+
+    function geocodeLocation(location) {
+      var apiUrl = 'https://nominatim.openstreetmap.org/search';
+      $.getJSON(apiUrl, {
+        q: location,
+        format: 'json',
+        limit: 1
+      })
+      .done(function(data) {
+        if (data.length > 0) {
+          latitude = parseFloat(data[0].lat);
+          longitude = parseFloat(data[0].lon);
+          if (marker) {
+            map.removeLayer(marker);
+          }
+          marker = L.marker([latitude, longitude]).addTo(map);
+          map.setView([latitude, longitude], 13);
+          //document.getElementById('coordinates').textContent = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+          console.log('Latitude:', latitude);
+          console.log('Longitude:', longitude);
+          $('#petForm').show(); // Show the form to enter pet name after getting coordinates
+        } else {
+          console.log('Location not found');
+        }
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+        console.log('Error occurred while geocoding:', errorThrown);
+      });
+    }
+
+    function sendCoordinatesToServer(latitude, longitude, petname) {
+      $.ajax({
+        url: '/coordinates',
+        type: 'POST',
+        data: JSON.stringify({ latitude, longitude, petname }),
+        contentType: 'application/json',
+        success: function(response) {
+          console.log('Coordinates and pet name sent to the server');
+        },
+        error: function(error) {
+          console.log('Error occurred while sending coordinates and pet name to the server:', error);
+        }
+      });
+    }
+
+    map.on('click', function(e) {
+      latitude = e.latlng.lat;
+      longitude = e.latlng.lng;
+      if (marker) {
+        map.removeLayer(marker);
+      }
+      marker = L.marker([latitude, longitude]).addTo(map);
+      document.getElementById('coordinates').textContent = 'Latitude: ' + latitude.toFixed(6) + ', Longitude: ' + longitude.toFixed(6);
+      console.log('Latitude:', latitude);
+      console.log('Longitude:', longitude);
+      $('#petForm').show(); // Show the form to enter pet name after clicking on the map
+    });
+
+    $(document).ready(function() {
+        $('#location').on('input', function() {
+    var fullName = $(this).val();
+    
+    // Check if the full name is not empty
+    if (fullName.trim() !== '') {
+      geocodeLocation(fullName);
+    }
+    })
+      
+
+      $('#petForm').submit(function(event) {
+        event.preventDefault();
+        var petname = $('#petname').val();
+        sendCoordinatesToServer(latitude, longitude, petname); // Send coordinates and pet's name to the server
+      });
+    });
+  </script>
 </html>

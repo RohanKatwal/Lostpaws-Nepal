@@ -52,7 +52,7 @@
                             
                             
                     </div>
-                    <button id="glogin" name="glogin" class="gsubmit">
+                    <button id="glogin" name="glogin" class="gsubmit" onclick="loginWithGoogle()">
                         <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M20.8973 9.62306H20.1253V9.58329H11.5003V13.4166H16.9163C16.1262 15.6481 14.003 17.25 11.5003 17.25C8.32489 17.25 5.75033 14.6754 5.75033 11.5C5.75033 8.32452 8.32489 5.74996 11.5003 5.74996C12.9661 5.74996 14.2996 6.30292 15.315 7.20615L18.0256 4.4955C16.314 2.90036 14.0246 1.91663 11.5003 1.91663C6.20793 1.91663 1.91699 6.20756 1.91699 11.5C1.91699 16.7924 6.20793 21.0833 11.5003 21.0833C16.7927 21.0833 21.0837 16.7924 21.0837 11.5C21.0837 10.8574 21.0175 10.2302 20.8973 9.62306Z" fill="#FFC107"/>
                             <path d="M3.02148 7.0394L6.17009 9.3485C7.02205 7.23921 9.08534 5.74996 11.4999 5.74996C12.9656 5.74996 14.2992 6.30292 15.3145 7.20615L18.0252 4.4955C16.3136 2.90036 14.0241 1.91663 11.4999 1.91663C7.8189 1.91663 4.62669 3.99477 3.02148 7.0394Z" fill="#FF3D00"/>
@@ -77,6 +77,9 @@
 <script src="/js/login.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+    function loginWithGoogle() {
+        window.location.href = '/auth/google';
+    } 
 
 function showError(errorElement, errorMessage){
 document.querySelector( "." +errorElement).classList.add("display-error") ;

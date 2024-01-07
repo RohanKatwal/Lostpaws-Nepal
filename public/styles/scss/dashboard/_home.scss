@@ -32,7 +32,7 @@
           position: relative;
           font-size: 18px;
           font-weight: 400;
-          color: #91A0AE;
+          color: #333;
           padding: 0 50px;
           transition: all .4s ease;
           &:hover {
@@ -55,6 +55,7 @@
 main{
     margin-left: 260px;
     padding: 0 40px;
+    background: #F8FAFE;
     .dashboard-navbar{
         height: 80px;
         padding: 20px 0;

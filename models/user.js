@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
       type: String,
-      required: true,
+      // required: true,
       unique: true
     },
     emailVerify: {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
     phoneNumber: String,
     profileImage: {
         type: String,
-        default: 'image/profile.png'
+        default: '/image/profile.jpg'
     },
     role: { type: String, default: "user" },
     googleId: {
