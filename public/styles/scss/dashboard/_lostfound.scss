@@ -47,7 +47,7 @@
             }
             .lostform-content2{
                 display: grid;
-                grid-template-columns: 66% 30%;
+                grid-template-columns: 2fr 1fr;
                 gap: 30px;
                 margin-top: 30px;
                 margin-bottom: 30px;
@@ -114,32 +114,30 @@
                     &-wrap {
                     display: flex;
                     flex-wrap: wrap;
-                    margin: 0 -10px;
                     }
                     
                     &-box {
-                    width: 125px;
-                    padding: 0 12px;
+                    margin-top: 20px;
                     margin-bottom: 12px;
+                    display: flex;
+                    gap: 10px;   
                     }
-                    
+                    // .mpimg{
+                    //     width: 125px;
+                    //     height: 131px;
+                    //     border-radius:16px;
+                    // }
                     &-close {
                         width: 24px;
                         height: 24px;
                         border-radius: 50%;
-                        background-color: rgba(0, 0, 0, 0.5);
                         position: relative;
-                        top: 1px;
-                        right: -102px;
-                        text-align: center;
-                        line-height: 24px;
-                        z-index: 1;
                         cursor: pointer;
                 
                         &:after {
                         content: '\2716';
                         font-size: 14px;
-                        color: white;
+                        color: rgb(0, 0, 0);
                         }
                     }
                 }
@@ -150,7 +148,9 @@
                 background-position: center;
                 background-size: cover;
                 position: relative;
-                padding-bottom: 100%;
+                width: 125px;
+                height: 131px;
+                border-radius:16px;
                 }
             .submit-cancel-btn{
                 display: flex;

@@ -148,7 +148,8 @@ function clearError(){
             $("#login").prop('disabled', false);
             $('#loading').hide();
             $('#noloading').show();
-            showError("password-error","Incorrect Password")
+            showError("email-error","Incorrect email or Password")
+            showError("password-error","Incorrect email or Password")
             return false;
             }
             if(data.title=='unregistered'){

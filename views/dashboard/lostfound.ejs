@@ -15,7 +15,7 @@
                         <label for="">Type <span style="color: red;">*</span></label>
                         <select palceholder="Dog" id="type">
                             <option value="Found">Found</option>
-                            <option value="Lost">Lost</option>
+                            <option value="Lost" selected>Lost</option>
                         </select>
                     </div>
                     <div class="space">
@@ -29,11 +29,11 @@
                             <option value="Horse">Horse</option>
                         </select>
                     </div>
-                    <div class="space">
+                    <div class="space hidden">
                         <label for="">Pet Name</label>
                         <input id="petname" type="text" placeholder="Enter a pet name">
                     </div>
-                    <div class="space">
+                    <div class="space hidden">
                         <label for="">Gender</label>
                         <select palceholder="Male" id="gender">
                             <option value="Male">Male</option>
@@ -44,7 +44,7 @@
                         <label for="">Color</label>
                         <input id="color" type="text" placeholder="Enter a pet Color">
                     </div>
-                    <div class="space">
+                    <div class="space hidden">
                         <label for="">Age</label>
                         <input id="age" type="number" placeholder="Enter a pet age">
                     </div>
@@ -70,9 +70,9 @@
                         <label for="">Location</label>
                         <input id="location" type="text" placeholder="Enter a Location">
                     </div>
-                    <div class="space2">
+                    <div class="space2 hidden">
                       <label for="reward">Reward</label>
-                      <input type="number" placeholder="0.00" id="reward" step="0.01">
+                      <input type="number" placeholder="0.00" id="reward" step="0.100">
                       
                     </div>
                 </div>
@@ -118,6 +118,25 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+
+//for found and lost
+// var selectedType = document.querySelector("#type");
+$("#type").on("change", function() {
+  var selectedType = $(this).val();
+if (selectedType === "Found") {
+    document.querySelectorAll(".hidden").forEach((element) => {
+        element.style.display = "none";
+    });
+} else {
+    document.querySelectorAll(".hidden").forEach((element) => {
+        element.style.display = "flex";
+    });
+}
+})
+
+
+
     //preview image
     jQuery(document).ready(function () {
   ImgUpload();
@@ -157,7 +176,7 @@ function ImgUpload() {
 
             var reader = new FileReader();
             reader.onload = function (e) {
-              var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+              var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'></div><div class='upload__img-close'></div></div>";
               imgWrap.append(html);
               iterator++;
             }
@@ -176,7 +195,7 @@ function ImgUpload() {
         break;
       }
     }
-    $(this).parent().parent().remove();
+    $(this).parent().remove();
   });
 }
     //Map
