@@ -9,7 +9,7 @@
         </div>
     <div class="lostfound">
         <div class="container">
-            <form action="" class="lostform" enctype="multipart/form-data" id="lostform">
+            <form action="" class="lostform" enctype="multipart/form-data" id="petForm">
                 <div class="lostform-content">
                     <div class="space">
                         <label for="">Type <span style="color: red;">*</span></label>
@@ -38,6 +38,7 @@
                         <select palceholder="Male" id="gender">
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
+                            <option value="Unknown">Unknown</option>
                         </select>
                     </div>
                     <div class="space">
@@ -79,7 +80,7 @@
                 <div class="map-content">
                     <label for="">Point Precise Location on map</label>
                     <div id="map" class="map"></div>
-                    <!-- <p id="coordinates"></p> -->
+                    <p id="coordinates"></p>
                 </div>
                 <div class="description">
                     <label for="">Description <span style="color: red;">*</span></label>
@@ -95,7 +96,7 @@
                             <path d="M24 16H26V34H24V16Z" fill="#2D2D3D"/>
                         </svg>
                         <label>Add multiple image</label>
-                        <input type="file" multiple="" data-max_length="20" class="upload__inputfile">
+                        <input type="file" multiple="" data-max_length="20" id="petImg" name="petImg" class="upload__inputfile">
                       </label>
                     </div>
                     <div class="upload__img-wrap"></div>
@@ -103,7 +104,7 @@
                 <div class="submit-cancel-btn">
 
                     <button class="cancel-btn">Cancel</button>
-                    <button class="submit-btn" id="PostBtn" type="button" name="" value="">
+                    <button class="submit-btn" id="PostBtn" type="submit" name="" value="">
                         <div id="loading2" class="loading" style="display: none;"></div>
                         <span id="noloading2" style="display: block;">Submit</span>
                     </button>
@@ -117,6 +118,7 @@
 <script src="/js/dashboard/home.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 
 
@@ -238,21 +240,6 @@ function ImgUpload() {
       });
     }
 
-    function sendCoordinatesToServer(latitude, longitude, petname) {
-      $.ajax({
-        url: '/coordinates',
-        type: 'POST',
-        data: JSON.stringify({ latitude, longitude, petname }),
-        contentType: 'application/json',
-        success: function(response) {
-          console.log('Coordinates and pet name sent to the server');
-        },
-        error: function(error) {
-          console.log('Error occurred while sending coordinates and pet name to the server:', error);
-        }
-      });
-    }
-
     map.on('click', function(e) {
       latitude = e.latlng.lat;
       longitude = e.latlng.lng;
@@ -279,8 +266,51 @@ function ImgUpload() {
 
       $('#petForm').submit(function(event) {
         event.preventDefault();
+        var formData= new FormData();
+
+        var typeSelect = document.getElementById("type");
+        var type = typeSelect.options[typeSelect.selectedIndex].value;
+        var petSelect = document.getElementById("pet");
+        var pet = petSelect.options[petSelect.selectedIndex].value;
         var petname = $('#petname').val();
-        sendCoordinatesToServer(latitude, longitude, petname); // Send coordinates and pet's name to the server
+        var genderSelect = document.getElementById("gender");
+        var gender = genderSelect.options[genderSelect.selectedIndex].value;
+        var colour = $('#color').val();
+        var age = $('#age').val();
+        var breed = $('#breed').val();
+        var sizeSelect = document.getElementById("size");
+        var size = sizeSelect.options[sizeSelect.selectedIndex].value;
+        var date = $('#date').val();
+        var location = $('#location').val();
+        var reward = $('#reward').val();
+        var description = $('#description').val();
+        
+        formData.append('type',type)
+        formData.append('pet',pet)
+        formData.append('petname',petname)
+        formData.append('gender',gender)
+        formData.append('colour',colour)
+        formData.append('breed',breed)
+        formData.append('age',age)
+        formData.append('latitude',latitude)
+        formData.append('longitude',longitude)
+        formData.append('size',size)
+        formData.append('date',date)
+        formData.append('location',location)
+        formData.append('reward',reward)
+        formData.append('description',description)
+       
+
+
+        $('.upload__img-box').each(function () {
+        var petImage = $("#petImg").prop('files')[0];
+        formData.append('petImg', petImage);
+        });
+        console.log(...formData)
+        return fetch('/dashboard/lostfound',{
+        method: 'POST',
+        body:formData
+        })
       });
     });
   </script>
