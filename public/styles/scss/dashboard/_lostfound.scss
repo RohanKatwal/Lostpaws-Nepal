@@ -173,3 +173,12 @@
         }
     }
 }
+.error{
+    color: red !important;
+    display: none;
+    }
+    .display-error {
+        display: block;
+        text-align: left !important;
+        margin:0 !important;
+}

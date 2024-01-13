@@ -33,7 +33,7 @@
                         <label for="">Pet Name</label>
                         <input id="petname" type="text" placeholder="Enter a pet name">
                     </div>
-                    <div class="space hidden">
+                    <div class="space ">
                         <label for="">Gender</label>
                         <select palceholder="Male" id="gender">
                             <option value="Male">Male</option>
@@ -44,12 +44,13 @@
                     <div class="space">
                         <label for="">Color</label>
                         <input id="color" type="text" placeholder="Enter a pet Color">
-                    </div>
+                        <p class="error color-error"></p>
+                      </div>
                     <div class="space hidden">
                         <label for="">Age</label>
                         <input id="age" type="number" placeholder="Enter a pet age">
                     </div>
-                    <div class="space">
+                    <div class="space hidden">
                         <label for="">Breed</label>
                         <input id="breed" type="text" placeholder="Enter a pet breed">
                     </div>
@@ -64,6 +65,7 @@
                     <div class="space">
                         <label for="">Date</label>
                         <input id="date" type="date" placeholder="">
+                        <p class="error date-error"></p>
                     </div>
                 </div>
                 <div class="lostform-content2">
@@ -80,11 +82,13 @@
                 <div class="map-content">
                     <label for="">Point Precise Location on map</label>
                     <div id="map" class="map"></div>
-                    <p id="coordinates"></p>
+                    <p class="error map-error"></p>
+                    <!-- <p id="coordinates"></p> -->
                 </div>
                 <div class="description">
                     <label for="">Description <span style="color: red;">*</span></label>
                     <textarea id="description" type="text"></textarea>
+                    <p class="error description-error"></p>
                 </div>
                 <div class="upload__box">
                     <label for="">Upload pet image <span style="color: red;">*</span></label>
@@ -96,6 +100,7 @@
                             <path d="M24 16H26V34H24V16Z" fill="#2D2D3D"/>
                         </svg>
                         <label>Add multiple image</label>
+                        <p class="error image-error"></p>
                         <input type="file" multiple="" data-max_length="20" id="petImg" name="petImg" class="upload__inputfile">
                       </label>
                     </div>
@@ -115,12 +120,41 @@
     </div>
     </main>
 </body>
+<script src="/js/toast.js"></script>
 <script src="/js/dashboard/home.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
 
+//error control
+function showError(errorElement, errorMessage){
+document.querySelector( "." +errorElement).classList.add("display-error") ;
+document.querySelector( "." +errorElement).innerHTML = errorMessage;
+if(errorElement=="map-error"){
+    document.querySelector("#map").style.border = "1px solid red"
+}else if(errorElement=="description-error"){
+    document.querySelector("#description").style.border = "1px solid red"
+}else if(errorElement=="color-error"){
+    document.querySelector("#color").style.border = "1px solid red"
+}else if(errorElement=="date-error"){
+    document.querySelector("#date").style.border = "1px solid red"
+}else if(errorElement=="image-error"){
+    document.querySelector("#petImg").style.border = "1px solid red"
+}
+}
+
+function clearError(){
+    let errors = document.querySelectorAll(".error") ;
+    for (let error of errors){
+    error.classList.remove("display-error") ;
+    document.querySelector("#description").style.border = "1px solid #BECAE3"
+    document.querySelector("#color").style.border = "1px solid #BECAE3"
+    document.querySelector("#date").style.border = "1px solid #BECAE3"
+    document.querySelector("#petImg").style.border = "1px solid #BECAE3"
+    document.querySelector("#map").style.border = "1px solid #BECAE3"
+}
+}
 
 //for found and lost
 // var selectedType = document.querySelector("#type");
@@ -247,7 +281,7 @@ function ImgUpload() {
         map.removeLayer(marker);
       }
       marker = L.marker([latitude, longitude]).addTo(map);
-      document.getElementById('coordinates').textContent = 'Latitude: ' + latitude.toFixed(6) + ', Longitude: ' + longitude.toFixed(6);
+      //document.getElementById('coordinates').textContent = 'Latitude: ' + latitude.toFixed(6) + ', Longitude: ' + longitude.toFixed(6);
       console.log('Latitude:', latitude);
       console.log('Longitude:', longitude);
       $('#petForm').show(); // Show the form to enter pet name after clicking on the map
@@ -285,6 +319,40 @@ function ImgUpload() {
         var reward = $('#reward').val();
         var description = $('#description').val();
         
+        clearError();
+        if (colour==""){
+                $('#postBtn').prop('disabled', false);
+                $('#loading').hide();
+                $('#noloading').show();
+                showError("color-error","please provide a pet colour")
+                return false;
+            } else if(date==""){
+                $('#PostBtn').prop('disabled', false);
+                $('#loading').hide();
+                $('#noloading').show();
+                showError("date-error","please provide a date")
+                return false;
+            }else if(latitude==undefined || longitude==undefined){
+                $('#PostBtn').prop('disabled', false);
+                $('#loading').hide();
+                $('#noloading').show();
+                showError("map-error","please place your location on map or search location")
+                return false;
+            }else if(description=="" ){
+                $('#PostBtn').prop('disabled', false);
+                $('#loading').hide();
+                $('#noloading').show();
+                showError("description-error","please provide description")
+                return false;
+            }else if(petImg.files.length === 0 ){
+                $('#PostBtn').prop('disabled', false);
+                $('#loading').hide();
+                $('#noloading').show();
+                showError("image-error","please provide pet image")
+                return false;
+            }
+            
+
         formData.append('type',type)
         formData.append('pet',pet)
         formData.append('petname',petname)
@@ -296,7 +364,6 @@ function ImgUpload() {
         formData.append('longitude',longitude)
         formData.append('size',size)
         formData.append('date',date)
-        formData.append('location',location)
         formData.append('reward',reward)
         formData.append('description',description)
        
@@ -310,7 +377,30 @@ function ImgUpload() {
         return fetch('/dashboard/lostfound',{
         method: 'POST',
         body:formData
-        })
+        }).then(res=>res.json())
+            .then(data=>{
+                if(data.title == 'failure'){
+                $('#PostBtn').prop('disabled', false);
+                $('#loading').hide();
+                $('#noloading').show();
+
+                return Toast.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong',
+                    icon: 'error',
+                    })
+                }   
+                if(data.title == 'success'){
+                    Toast.fire({
+                        title: 'Success!',
+                        text: 'Posted successfully',
+                        icon: 'success',
+                    }).then(() => {
+                        window.location.reload()
+                    })
+                
+            }
+            })
       });
     });
   </script>
