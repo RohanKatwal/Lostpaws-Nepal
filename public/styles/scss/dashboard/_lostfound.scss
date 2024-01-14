@@ -30,6 +30,7 @@
                     display: flex;
                     flex-direction: column;
                     gap: 10px;
+                    position: relative;;
                     label{
                         font-weight: 500;
                         font-size: 14px;
@@ -42,6 +43,10 @@
                             border: 1px solid #D6DAE1;
                             outline: none;
                         }
+                    }
+                    p{
+                        position:absolute;
+                        bottom:-25px;
                     }
                 }
             }
@@ -68,6 +73,7 @@
                             outline: none;
                         }
                     }
+                    
                 }
             }
             .map{

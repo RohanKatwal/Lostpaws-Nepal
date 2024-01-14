@@ -42,7 +42,7 @@
                         </select>
                     </div>
                     <div class="space">
-                        <label for="">Color</label>
+                        <label for="">Color <span style="color: red;">*</span></label>
                         <input id="color" type="text" placeholder="Enter a pet Color">
                         <p class="error color-error"></p>
                       </div>
@@ -63,7 +63,7 @@
                         </select>
                     </div>
                     <div class="space">
-                        <label for="">Date</label>
+                        <label for="">Date <span style="color: red;">*</span></label>
                         <input id="date" type="date" placeholder="">
                         <p class="error date-error"></p>
                     </div>
@@ -101,7 +101,7 @@
                         </svg>
                         <label>Add multiple image</label>
                         <p class="error image-error"></p>
-                        <input type="file" multiple="" data-max_length="20" id="petImg" name="petImg" class="upload__inputfile">
+                        <input type="file" multiple="" data-max_length="20" id="petImg" name="petImg" class="upload__inputfile" accept="image/*" capture="camera">
                       </label>
                     </div>
                     <div class="upload__img-wrap"></div>
@@ -129,8 +129,20 @@
 
 //error control
 function showError(errorElement, errorMessage){
-document.querySelector( "." +errorElement).classList.add("display-error") ;
-document.querySelector( "." +errorElement).innerHTML = errorMessage;
+  var errorTarget = document.querySelector("." + errorElement);
+
+console.log("Scrolling to:", errorElement);
+
+errorTarget.classList.add("display-error");
+errorTarget.innerHTML = errorMessage;
+
+// Scroll to the error section
+errorTarget.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+    inline: "nearest"
+});
+
 if(errorElement=="map-error"){
     document.querySelector("#map").style.border = "1px solid red"
 }else if(errorElement=="description-error"){
