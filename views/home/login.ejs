@@ -112,7 +112,7 @@ function clearError(){
         $("#login").prop('disabled', false);
         $('#loading').hide();
         $('#noloading').show();
-            showError("email-error","please enter your email")
+            showError("email-error","Please enter your email")
             return false;
         }
 
@@ -120,7 +120,7 @@ function clearError(){
         $("#login").prop('disabled', false);
         $('#loading').hide();
         $('#noloading').show();
-            showError("password-error","please enter your password")
+            showError("password-error","Please enter your password")
             return false;
         }
 
@@ -148,22 +148,22 @@ function clearError(){
             $("#login").prop('disabled', false);
             $('#loading').hide();
             $('#noloading').show();
-            showError("email-error","Incorrect email or Password")
-            showError("password-error","Incorrect email or Password")
+            showError("email-error","Incorrect email or password")
+            showError("password-error","Incorrect email or password")
             return false;
             }
             if(data.title=='unregistered'){
             $("#login").prop('disabled', false);
             $('#loading').hide();
             $('#noloading').show();
-                showError("email-error","User not verified, Please register again")
+                showError("email-error","User not verified, please register again")
                 return false;
             }
             if(data.title=='no user'){
             $("#login").prop('disabled', false);
             $('#loading').hide();
             $('#noloading').show();
-                showError("email-error","User not found, Please register")
+                showError("email-error","User not found, please register")
                 return false;
             }
         })

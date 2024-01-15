@@ -115,38 +115,38 @@ function clearError(){
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("name-error","please enter your username")
+                showError("name-error","Please enter your username")
                 return false;
             } else if(email==""){
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("email-error","please enter your email")
+                showError("email-error","Please enter your email")
                 return false;
             }else if(phoneNumber==""){
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("phoneNumber-error","please enter your number")
+                showError("phoneNumber-error","Please enter your number")
                 return false;
             }else if(password==""){
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("password-error","please enter your password")
+                showError("password-error","Please enter your password")
                 return false;
             }else if(confirmpassword==""){
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("confirmpassword-error","please enter your confirm password")
+                showError("confirmpassword-error","Please enter your confirm password")
                 return false;
             }else if (password != confirmpassword) {
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("password-error","password do not match")
-                showError("confirmpassword-error","password do not match")
+                showError("password-error","Password do not match")
+                showError("confirmpassword-error","Password do not match")
                 return false;
             } else if (name.length < 4 || /^[^a-zA-Z]|[^a-zA-Z0-9_]/.test(name)) {
                 $('#registerBtn').prop('disabled', false);
@@ -170,7 +170,7 @@ function clearError(){
                 $('#registerBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("password-error","must be 8+ characters, 1 uppercase, 1 lowercase, 1 number")
+                showError("password-error","Must be 8+ characters, 1 uppercase, 1 lowercase, 1 number")
                 return false;
             }
         return fetch('/register',{

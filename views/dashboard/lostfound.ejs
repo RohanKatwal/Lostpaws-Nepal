@@ -336,31 +336,31 @@ function ImgUpload() {
                 $('#postBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("color-error","please provide a pet colour")
+                showError("color-error","Provide a pet color")
                 return false;
             } else if(date==""){
                 $('#PostBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("date-error","please provide a date")
+                showError("date-error","Provide a date")
                 return false;
             }else if(latitude==undefined || longitude==undefined){
                 $('#PostBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("map-error","please place your location on map or search location")
+                showError("map-error","Place your location on map or search location")
                 return false;
             }else if(description=="" ){
                 $('#PostBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("description-error","please provide description")
+                showError("description-error","Add a pet description")
                 return false;
             }else if(petImg.files.length === 0 ){
                 $('#PostBtn').prop('disabled', false);
                 $('#loading').hide();
                 $('#noloading').show();
-                showError("image-error","please provide pet image")
+                showError("image-error","Upload a pet image")
                 return false;
             }
             
