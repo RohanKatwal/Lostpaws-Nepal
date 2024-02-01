@@ -1,0 +1,218 @@
+<%- include("../components/head") %>
+<body>
+    <%- include("../components/nav") %>
+    <div class="container">
+        <div class="wrapper">
+            <div class="filter">
+                <form action="" enctype="multipart/form-data" id="petForm">
+                    <div class="sortby">
+                        <div>
+                            <svg width="16" height="23" viewBox="0 0 16 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13.6772 14.7511C13.6772 14.5751 13.6281 14.4063 13.5407 14.2819C13.4532 14.1574 13.3346 14.0875 13.211 14.0875H10.4135C10.2899 14.0875 10.1713 14.1574 10.0838 14.2819C9.99638 14.4063 9.94726 14.5751 9.94726 14.7511C9.94726 14.9271 9.99638 15.0959 10.0838 15.2204C10.1713 15.3448 10.2899 15.4147 10.4135 15.4147H13.211C13.3346 15.4147 13.4532 15.3448 13.5407 15.2204C13.6281 15.0959 13.6772 14.9271 13.6772 14.7511ZM13.6772 10.7696C13.6772 10.5936 13.6281 10.4248 13.5407 10.3003C13.4532 10.1759 13.3346 10.106 13.211 10.106H6.68353C6.55987 10.106 6.44128 10.1759 6.35384 10.3003C6.2664 10.4248 6.21728 10.5936 6.21728 10.7696C6.21728 10.9455 6.2664 11.1143 6.35384 11.2388C6.44128 11.3632 6.55987 11.4331 6.68353 11.4331H13.211C13.3346 11.4331 13.4532 11.3632 13.5407 11.2388C13.6281 11.1143 13.6772 10.9455 13.6772 10.7696ZM13.6772 6.78798C13.6772 6.61199 13.6281 6.4432 13.5407 6.31875C13.4532 6.1943 13.3346 6.12439 13.211 6.12439H2.95355C2.8299 6.12439 2.7113 6.1943 2.62387 6.31875C2.53643 6.4432 2.4873 6.61199 2.4873 6.78798C2.4873 6.96398 2.53643 7.13277 2.62387 7.25722C2.7113 7.38166 2.8299 7.45158 2.95355 7.45158H13.211C13.3346 7.45158 13.4532 7.38166 13.5407 7.25722C13.6281 7.13277 13.6772 6.96398 13.6772 6.78798Z" fill="black"/>
+                            </svg> 
+                            <p>Filter</p>
+                        </div>
+                        <select name="" id="">
+                            <option value="">Ascending</option>
+                            <option value="">Descending</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="ftype">
+                        <label for="">Type <span style="color: red;">*</span></label>
+                        <select palceholder="Dog" id="type">
+                            <option value="Found">Found</option>
+                            <option value="Lost" selected>Lost</option>
+                        </select>
+                    </div>
+                    <div class="ftype">
+                        <label for="">Pet <span style="color: red;">*</span></label>
+                        <select palceholder="Dog" id="pet">
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Bird">Bird</option>
+                            <option value="Rabbit">Rabbit</option>
+                            <option value="Hamster">Hamster</option>
+                            <option value="Horse">Horse</option>
+                        </select>
+                    </div>
+                    <div class="ftype">
+                        <label for="">Location</label>
+                        <input id="location" type="text" placeholder="Enter a Location">
+                    </div>
+                    <div class="map-content ftype">
+                        <label for="">Point Precise Location on map</label>
+                        <div id="map" class="map"></div>
+                        <p class="error map-error"></p>
+                        <!-- <p id="coordinates"></p> -->
+                    </div>
+                    <div class="ftype">
+                        <label for="">Location Radius in Km</label>
+                        <input type="range">
+                    </div>
+                    <div class="ftype ">
+                        <label for="">Gender</label>
+                        <select palceholder="Male" id="gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Unknown">Unknown</option>
+                        </select>
+                    </div>
+                    <div class="ftype">
+                        <label for="">Color <span style="color: red;">*</span></label>
+                        <input id="color" type="text" placeholder="Enter a pet Color">
+                        <p class="error color-error"></p>
+                    </div>
+                    <div class="ftype">
+                        <label for="">Size</label>
+                        <select palceholder="Small" id="size">
+                            <option value="Small">Small</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Large">Large</option>
+                        </select>
+                    </div>
+                    <div class="submit-cancel-btn">
+                        <button class="submit-btn" id="PostBtn" type="submit" name="" value="">
+                            <div id="loading2" class="loading" style="display: none;"></div>
+                            <span id="noloading2" style="display: block;">Search</span>
+                        </button>
+                        <button class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="filter-content">
+                <div class="filter-card">
+
+                    <div class="filter-card-wrapper">
+                        <img src="/image/register.png" alt="">
+                        <div class="card-content">
+                            <div class="card-title">
+                                <p class="petName">Sam</p>
+
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="4.20401" cy="4.34012" r="3.93204" fill="#0A66C2"/>
+                                    </svg>
+                            </div>
+                            <p>Bull dog</p>
+                            <div class="location-title">
+                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_30_367)">
+                                    <path d="M5.46813 1.56036C4.5528 1.56144 3.67527 1.92553 3.02803 2.57277C2.3808 3.22 2.01671 4.09753 2.01563 5.01286C2.01453 5.76087 2.25887 6.48858 2.71115 7.08436C2.71115 7.08436 2.80531 7.20833 2.82069 7.22622L5.46813 10.3485L8.11682 7.22466C8.13063 7.20802 8.2251 7.08436 8.2251 7.08436L8.22542 7.08342C8.67747 6.4879 8.9217 5.76052 8.92062 5.01286C8.91954 4.09753 8.55545 3.22 7.90822 2.57277C7.26098 1.92553 6.38345 1.56144 5.46813 1.56036ZM5.46813 6.26831C5.21982 6.26831 4.97709 6.19468 4.77063 6.05673C4.56418 5.91878 4.40326 5.72271 4.30824 5.4933C4.21322 5.2639 4.18835 5.01147 4.2368 4.76793C4.28524 4.5244 4.40481 4.3007 4.58039 4.12512C4.75596 3.94954 4.97967 3.82997 5.2232 3.78153C5.46673 3.73309 5.71916 3.75795 5.94857 3.85297C6.17797 3.94799 6.37405 4.10891 6.512 4.31537C6.64995 4.52183 6.72358 4.76456 6.72358 5.01286C6.72316 5.3457 6.59076 5.66479 6.35541 5.90014C6.12005 6.13549 5.80097 6.2679 5.46813 6.26831Z" fill="black"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_30_367">
+                                    <rect width="10.0436" height="10.0436" fill="white" transform="translate(0.446777 0.9328)"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                                <p>Kapan</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <img class="badger" src="/image/Lostbadge.png" alt="">
+                        <img class="paw" src="/image/paw.png" alt="">
+                </div>
+                <div class="filter-card">
+                    <div class="filter-card-wrapper">
+                        <img src="/image/test.jpeg" alt="">
+                        <div class="card-content">
+                            <div class="card-title">
+                                <p class="petName">Sam</p>
+
+                                <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="4.20401" cy="4.34012" r="3.93204" fill="#0A66C2"/>
+                                    </svg>
+                            </div>
+                            <p>Bull dog</p>
+                            <div class="location-title">
+                                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_30_367)">
+                                    <path d="M5.46813 1.56036C4.5528 1.56144 3.67527 1.92553 3.02803 2.57277C2.3808 3.22 2.01671 4.09753 2.01563 5.01286C2.01453 5.76087 2.25887 6.48858 2.71115 7.08436C2.71115 7.08436 2.80531 7.20833 2.82069 7.22622L5.46813 10.3485L8.11682 7.22466C8.13063 7.20802 8.2251 7.08436 8.2251 7.08436L8.22542 7.08342C8.67747 6.4879 8.9217 5.76052 8.92062 5.01286C8.91954 4.09753 8.55545 3.22 7.90822 2.57277C7.26098 1.92553 6.38345 1.56144 5.46813 1.56036ZM5.46813 6.26831C5.21982 6.26831 4.97709 6.19468 4.77063 6.05673C4.56418 5.91878 4.40326 5.72271 4.30824 5.4933C4.21322 5.2639 4.18835 5.01147 4.2368 4.76793C4.28524 4.5244 4.40481 4.3007 4.58039 4.12512C4.75596 3.94954 4.97967 3.82997 5.2232 3.78153C5.46673 3.73309 5.71916 3.75795 5.94857 3.85297C6.17797 3.94799 6.37405 4.10891 6.512 4.31537C6.64995 4.52183 6.72358 4.76456 6.72358 5.01286C6.72316 5.3457 6.59076 5.66479 6.35541 5.90014C6.12005 6.13549 5.80097 6.2679 5.46813 6.26831Z" fill="black"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_30_367">
+                                    <rect width="10.0436" height="10.0436" fill="white" transform="translate(0.446777 0.9328)"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                                <p>Kapan</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <img class="badger" src="/image/Foundbadge.png" alt="">
+                        <img class="paw" src="/image/paw.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        //Map
+        var map = L.map('map').setView([0, 0], 2);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+  maxZoom: 18,
+}).addTo(map);
+
+var marker;
+var latitude, longitude;
+
+function geocodeLocation(location) {
+  var apiUrl = 'https://nominatim.openstreetmap.org/search';
+  $.getJSON(apiUrl, {
+    q: location,
+    format: 'json',
+    limit: 1
+  })
+  .done(function(data) {
+    if (data.length > 0) {
+      latitude = parseFloat(data[0].lat);
+      longitude = parseFloat(data[0].lon);
+      if (marker) {
+        map.removeLayer(marker);
+      }
+      marker = L.marker([latitude, longitude]).addTo(map);
+      map.setView([latitude, longitude], 13);
+      //document.getElementById('coordinates').textContent = 'Latitude: ' + latitude + ', Longitude: ' + longitude;
+      console.log('Latitude:', latitude);
+      console.log('Longitude:', longitude);
+      $('#petForm').show(); // Show the form to enter pet name after getting coordinates
+    } else {
+      console.log('Location not found');
+    }
+  })
+  .fail(function(jqXHR, textStatus, errorThrown) {
+    console.log('Error occurred while geocoding:', errorThrown);
+  });
+}
+
+map.on('click', function(e) {
+  latitude = e.latlng.lat;
+  longitude = e.latlng.lng;
+  if (marker) {
+    map.removeLayer(marker);
+  }
+  marker = L.marker([latitude, longitude]).addTo(map);
+  //document.getElementById('coordinates').textContent = 'Latitude: ' + latitude.toFixed(6) + ', Longitude: ' + longitude.toFixed(6);
+  console.log('Latitude:', latitude);
+  console.log('Longitude:', longitude);
+  $('#petForm').show(); // Show the form to enter pet name after clicking on the map
+});
+
+$(document).ready(function() {
+    $('#location').on('input', function() {
+var fullName = $(this).val();
+
+// Check if the full name is not empty
+if (fullName.trim() !== '') {
+  geocodeLocation(fullName);
+}
+})})
+</script>
+</html>

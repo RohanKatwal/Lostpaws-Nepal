@@ -190,6 +190,11 @@ router.get('/verify', isguest,(req, res)=>{
     res.render('home/verify.ejs',{email,auth: false})
 })
 
+router.get('/search',(req, res)=>{
+    res.render('home/search.ejs',{auth: false})
+})
+
+
 router.post('/verify', async (req, res) => {
     console.log(req.body);
     const email = req.body.email;
