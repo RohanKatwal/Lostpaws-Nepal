@@ -191,7 +191,10 @@ router.get('/verify', isguest,(req, res)=>{
 })
 
 router.get('/search',(req, res)=>{
-    res.render('home/search.ejs',{auth: false})
+    if( req.isAuthenticated()){
+        return res.render('home/search.ejs', {auth: true, user: req.user})
+    }
+    res.render('home/search.ejs', {auth: false})
 })
 
 
