@@ -22,6 +22,7 @@ const petSchema = new mongoose.Schema({
   date: Date,
   reward:Number,
   description: String,
+  address: String,
   location: {
     type: {
       type: String,
@@ -42,6 +43,8 @@ const petSchema = new mongoose.Schema({
       },
     },
   ],
+}, {
+  timestamps: true // This will add createdAt and updatedAt fields
 });
 
 const Pet = mongoose.model('Pet', petSchema);

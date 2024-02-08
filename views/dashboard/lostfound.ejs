@@ -287,17 +287,44 @@ function ImgUpload() {
     }
 
     map.on('click', function(e) {
-      latitude = e.latlng.lat;
-      longitude = e.latlng.lng;
-      if (marker) {
+    latitude = e.latlng.lat;
+    longitude = e.latlng.lng;
+    if (marker) {
         map.removeLayer(marker);
-      }
-      marker = L.marker([latitude, longitude]).addTo(map);
-      //document.getElementById('coordinates').textContent = 'Latitude: ' + latitude.toFixed(6) + ', Longitude: ' + longitude.toFixed(6);
-      console.log('Latitude:', latitude);
-      console.log('Longitude:', longitude);
-      $('#petForm').show(); // Show the form to enter pet name after clicking on the map
+    }
+    marker = L.marker([latitude, longitude]).addTo(map);
+
+    // Reverse geocode the clicked coordinates to get the address
+    reverseGeocodeLocation(latitude, longitude);
+
+    console.log('Latitude:', latitude);
+    console.log('Longitude:', longitude);
+    $('#petForm').show(); // Show the form to enter pet name after clicking on the map
+  });
+
+  function reverseGeocodeLocation(latitude, longitude) {
+    var apiUrl = 'https://nominatim.openstreetmap.org/reverse';
+    $.getJSON(apiUrl, {
+        lat: latitude,
+        lon: longitude,
+        format: 'json',
+        addressdetails: 1
+    })
+    .done(function(data) {
+        if (data && data.display_name) {
+            var address = data.display_name;
+            // Update the location input field with the address
+            document.getElementById('location').value = address;
+        } else {
+            console.log('Address not found');
+        }
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+        console.log('Error occurred while reverse geocoding:', errorThrown);
     });
+}
+
+
 
     $(document).ready(function() {
         $('#location').on('input', function() {
@@ -327,7 +354,7 @@ function ImgUpload() {
         var sizeSelect = document.getElementById("size");
         var size = sizeSelect.options[sizeSelect.selectedIndex].value;
         var date = $('#date').val();
-        var location = $('#location').val();
+        var address = $('#location').val();
         var reward = $('#reward').val();
         var description = $('#description').val();
         
@@ -378,6 +405,7 @@ function ImgUpload() {
         formData.append('date',date)
         formData.append('reward',reward)
         formData.append('description',description)
+        formData.append('address',address)
        
 
 

@@ -1,9 +1,11 @@
 const router =require('express').Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/user')
+const Pet = require('../models/pet')
 const passport = require('passport');
 const { authenticateLocal} = require('../passport-config');
 const nodemailer = require('nodemailer');
+const geohash = require('ngeohash');
 
 //middleware for checking the user
 function isguest(req, res, next){
@@ -190,12 +192,61 @@ router.get('/verify', isguest,(req, res)=>{
     res.render('home/verify.ejs',{email,auth: false})
 })
 
-router.get('/search',(req, res)=>{
-    if( req.isAuthenticated()){
-        return res.render('home/search.ejs', {auth: true, user: req.user})
+router.get('/search', async (req, res) => {
+    const { type, pet, gender, color, size, latitude, longitude, radius } = req.query;
+    let query = {};
+
+    // Construct query based on provided parameters
+    if (type) query.type = type;
+    if (pet) query.pet = pet;
+    if (gender) query.gender = gender;
+    if (color) query.colour = color;
+    if (size) query.size = size;
+
+    try {
+        let pets;
+        if (typeof latitude !== 'undefined' && typeof longitude !== 'undefined' && radius) {
+            // Encode search coordinates to GeoHash
+            const searchGeohash = geohash.encode(parseFloat(latitude), parseFloat(longitude));
+            // Decode the bounding box from the GeoHash with radius
+            const boundingBox = geohash.decode_bbox(searchGeohash);
+            console.log("this is bounding box: " + boundingBox);
+            const adjustedRadius = parseFloat(radius) / 111.32; // Convert km to degrees (approximate)
+            // Adjust the bounding box with the radius
+            boundingBox[0] -= adjustedRadius;
+            boundingBox[1] -= adjustedRadius;
+            boundingBox[2] += adjustedRadius;
+            boundingBox[3] += adjustedRadius;
+            // Find pets within the adjusted bounding box and matching other criteria
+            pets = await Pet.find({
+                $and: [
+                    { location: {
+                        $geoWithin: {
+                            $box: [
+                                [boundingBox[1], boundingBox[0]],
+                                [boundingBox[3], boundingBox[2]],
+                            ],
+                        },
+                    }},
+                    query // Include other search criteria
+                ]
+            });
+        } else {
+            console.log("rohan")
+            // If latitude, longitude, and radius are not provided, fetch pets matching other criteria
+            pets = await Pet.find(query).sort({ createdAt: -1 });
+        }
+
+        // Render the search results
+        res.render('home/search.ejs', { auth: req.isAuthenticated(), user: req.user, pets: pets });
+    } catch (err) {
+        console.error("Error occurred during search:", err);
+        res.status(500).send("Internal Server Error");
     }
-    res.render('home/search.ejs', {auth: false})
-})
+});
+
+
+
 
 
 router.post('/verify', async (req, res) => {

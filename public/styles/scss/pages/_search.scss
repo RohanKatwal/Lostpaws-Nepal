@@ -4,10 +4,13 @@
     gap:40px;
     align-items: start;
     .filter{
-        width: 400px;
+        flex:1;
+        width: 411px;
         margin-bottom: 30px;
         padding-right: 20px;
         border-right: 1px solid #DDDDDD;
+        position: sticky;
+        top: 0;
         .sortby{
             display: flex;
             align-items: center;
@@ -88,13 +91,14 @@
         }
     }
     .filter-content{
+        flex:3;
         display: flex;
         flex-wrap: wrap;
         gap:50px;
         .filter-card{
             position: relative;
             .filter-card-wrapper{
-                outline:6px solid #0A66C2;
+                outline:5px solid #0A66C2;
                 outline-offset: 4px;
                 height:280px;
                 width:240px;
@@ -154,8 +158,8 @@
             }
             .paw{
                 position: absolute;
-                top: -22px;
-                right: -22px;
+                top: -33px;
+                right: -36px;
             }
         & :hover{
             .card-content{
@@ -170,5 +174,7 @@
     }
     
 }
+
+
 
 

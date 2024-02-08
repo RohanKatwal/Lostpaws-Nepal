@@ -47,7 +47,7 @@ router.get('/lostfound',loggedIn, async (req, res) => {
 router.post('/lostfound', loggedIn, uploadPetImages, async (req, res) => {
     console.log("Lostfound page activated");
     
-    const { type, pet, petname, gender, colour, breed, age, latitude, longitude,size,date,reward,description } = req.body;
+    const { type, pet, petname, gender, colour, breed, age,address, latitude, longitude,size,date,reward,description } = req.body;
     console.log(req.body);
     
     // Assuming 'petImages' is an array of image paths from your client-side FormData
@@ -70,6 +70,7 @@ router.post('/lostfound', loggedIn, uploadPetImages, async (req, res) => {
             breed,
             age,
             location,
+            address,
             size,date,reward,description,
             geohash: geohashValue,
             images: petImages.map(image => ({ path: image.path })),
