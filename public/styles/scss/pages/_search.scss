@@ -1,7 +1,8 @@
 .wrapper{
     margin-top: 90px;
     display: flex;  
-    gap:20px;
+    gap:40px;
+    align-items: start;
     .filter{
         width: 400px;
         margin-bottom: 30px;
@@ -89,10 +90,9 @@
     .filter-content{
         display: flex;
         flex-wrap: wrap;
-        gap:30px;
+        gap:50px;
         .filter-card{
             position: relative;
-            padding-left: 20px;
             .filter-card-wrapper{
                 outline:6px solid #0A66C2;
                 outline-offset: 4px;
@@ -157,7 +157,18 @@
                 top: -22px;
                 right: -22px;
             }
+        & :hover{
+            .card-content{
+                background-color:#0A66C2;
+                p{
+                    color: white !important;
+                }
+            }
+        }
         }
         
     }
+    
 }
+
+
