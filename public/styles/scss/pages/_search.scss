@@ -1,5 +1,5 @@
 .wrapper{
-    margin-top: 90px;
+    margin-top: 70px;
     display: flex;  
     gap:40px;
     align-items: start;
@@ -90,87 +90,92 @@
             }
         }
     }
-    .filter-content{
+    .filter-block{
         flex:3;
-        display: flex;
-        flex-wrap: wrap;
-        gap:50px;
-        .filter-card{
-            position: relative;
-            .filter-card-wrapper{
-                outline:5px solid #0A66C2;
-                outline-offset: 4px;
-                height:280px;
-                width:240px;
-                border: 3px solid white;
-                border-radius: 9px;
+        #queryParameters{
+            margin-bottom:40px;
+        }
+        .filter-content{
+            display: flex;
+            flex-wrap: wrap;
+            gap:50px;
+            .filter-card{
                 position: relative;
-                img{
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
+                .filter-card-wrapper{
+                    outline:5px solid #0A66C2;
+                    outline-offset: 4px;
+                    height:280px;
+                    width:240px;
+                    border: 3px solid white;
                     border-radius: 9px;
-                }
-                .card-content {
-                    position:absolute;
-                    bottom: 12px;
-                    left: 12px;
-                    
-                    background-color: white;
-                    border-radius:6px;
-                    padding:6px;
-                    width:130px;
-                    .card-title{
-                        display:flex;
-                        align-items: center;
-                        justify-content: space-between;
+                    position: relative;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 9px;
+                    }
+                    .card-content {
+                        position:absolute;
+                        bottom: 12px;
+                        left: 12px;
+                        
+                        background-color: white;
+                        border-radius:6px;
+                        padding:6px;
+                        width:130px;
+                        .card-title{
+                            display:flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            p{
+                                margin: 0;
+                                font-size: 15px;
+                                font-weight: 600;
+                                color: #000000;
+                            }
+                            
+                        }
                         p{
-                            margin: 0;
-                            font-size: 15px;
-                            font-weight: 600;
+                            margin:0;
+                            font-size: 13px;
                             color: #000000;
                         }
-                        
-                    }
-                    p{
-                        margin:0;
-                        font-size: 13px;
-                        color: #000000;
-                    }
-                    .location-title{
-                        display:flex;
-                        align-items: center;
-                        gap:10px;
-                        p{
-                            margin: 0;
+                        .location-title{
+                            display:flex;
+                            align-items: center;
+                            gap:10px;
+                            p{
+                                margin: 0;
+                            }
+                            
                         }
-                        
+                    }
+                
+                    
+                }
+                .badger{
+                    position: absolute;
+                    top: -22px;
+                    left: -17px;
+                    z-index: 1;
+                }
+                .paw{
+                    position: absolute;
+                    top: -33px;
+                    right: -36px;
+                }
+            & :hover{
+                .card-content{
+                    background-color:#0A66C2;
+                    p{
+                        color: white !important;
                     }
                 }
+            }
+            }
             
-                
-            }
-            .badger{
-                position: absolute;
-                top: -22px;
-                left: -17px;
-                z-index: 1;
-            }
-            .paw{
-                position: absolute;
-                top: -33px;
-                right: -36px;
-            }
-        & :hover{
-            .card-content{
-                background-color:#0A66C2;
-                p{
-                    color: white !important;
-                }
-            }
         }
-        }
-        
     }
     
 }

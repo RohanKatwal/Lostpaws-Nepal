@@ -202,7 +202,7 @@ router.get('/search', async (req, res) => {
     if (gender) query.gender = gender;
     if (color) query.colour = color;
     if (size) query.size = size;
-
+    // console.log(query)
     try {
         let pets;
         if (typeof latitude !== 'undefined' && typeof longitude !== 'undefined' && radius) {
@@ -210,7 +210,7 @@ router.get('/search', async (req, res) => {
             const searchGeohash = geohash.encode(parseFloat(latitude), parseFloat(longitude));
             // Decode the bounding box from the GeoHash with radius
             const boundingBox = geohash.decode_bbox(searchGeohash);
-            console.log("this is bounding box: " + boundingBox);
+            // console.log("this is bounding box: " + boundingBox);
             const adjustedRadius = parseFloat(radius) / 111.32; // Convert km to degrees (approximate)
             // Adjust the bounding box with the radius
             boundingBox[0] -= adjustedRadius;
