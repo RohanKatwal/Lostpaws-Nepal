@@ -245,7 +245,12 @@ router.get('/search', async (req, res) => {
     }
 });
 
-
+router.get('/search-inner/:id',async (req, res)=>{
+    const petId = req.params.id;
+    const pet = await Pet.findById(petId);
+    console.log(pet)
+    res.render('home/search-inner.ejs', { auth: req.isAuthenticated(), user: req.user, pet:pet });
+})
 
 
 

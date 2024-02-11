@@ -97,44 +97,46 @@
                         <p>No pets found</p>
                     <%}%>
                     <% for(var i=0; i < pets.length; i++){ %>
-                    <div class="filter-card">
-    
-                        <div class="filter-card-wrapper">
-                            <img src="/<%=pets[i].images[0].path %>" alt="">
-                            <div class="card-content">
-                                <div class="card-title">
-                                    <p class="petName"><%= pets[i].petname ? pets[i].petname : pets[i].pet %></p>
-    
-                                    <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="4.20401" cy="4.34012" r="3.93204" fill="#0A66C2"/>
+                    <a href="/search-inner/<%= pets[i].id %>">
+                        <div class="filter-card">
+        
+                            <div class="filter-card-wrapper">
+                                <img src="/<%=pets[i].images[0].path %>" alt="">
+                                <div class="card-content">
+                                    <div class="card-title">
+                                        <p class="petName"><%= pets[i].petname ? pets[i].petname : pets[i].pet %></p>
+        
+                                        <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="4.20401" cy="4.34012" r="3.93204" fill="#0A66C2"/>
+                                            </svg>
+                                    </div>
+                                    <p><%= pets[i].gender %></p>
+                                    <div class="location-title">
+                                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0_30_367)">
+                                            <path d="M5.46813 1.56036C4.5528 1.56144 3.67527 1.92553 3.02803 2.57277C2.3808 3.22 2.01671 4.09753 2.01563 5.01286C2.01453 5.76087 2.25887 6.48858 2.71115 7.08436C2.71115 7.08436 2.80531 7.20833 2.82069 7.22622L5.46813 10.3485L8.11682 7.22466C8.13063 7.20802 8.2251 7.08436 8.2251 7.08436L8.22542 7.08342C8.67747 6.4879 8.9217 5.76052 8.92062 5.01286C8.91954 4.09753 8.55545 3.22 7.90822 2.57277C7.26098 1.92553 6.38345 1.56144 5.46813 1.56036ZM5.46813 6.26831C5.21982 6.26831 4.97709 6.19468 4.77063 6.05673C4.56418 5.91878 4.40326 5.72271 4.30824 5.4933C4.21322 5.2639 4.18835 5.01147 4.2368 4.76793C4.28524 4.5244 4.40481 4.3007 4.58039 4.12512C4.75596 3.94954 4.97967 3.82997 5.2232 3.78153C5.46673 3.73309 5.71916 3.75795 5.94857 3.85297C6.17797 3.94799 6.37405 4.10891 6.512 4.31537C6.64995 4.52183 6.72358 4.76456 6.72358 5.01286C6.72316 5.3457 6.59076 5.66479 6.35541 5.90014C6.12005 6.13549 5.80097 6.2679 5.46813 6.26831Z" fill="black"/>
+                                            </g>
+                                            <defs>
+                                            <clipPath id="clip0_30_367">
+                                            <rect width="10.0436" height="10.0436" fill="white" transform="translate(0.446777 0.9328)"/>
+                                            </clipPath>
+                                            </defs>
                                         </svg>
+                                        <p><%= pets[i].address.slice(0, 11) %></p>
+                                    </div>
                                 </div>
-                                <p><%= pets[i].gender %></p>
-                                <div class="location-title">
-                                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_30_367)">
-                                        <path d="M5.46813 1.56036C4.5528 1.56144 3.67527 1.92553 3.02803 2.57277C2.3808 3.22 2.01671 4.09753 2.01563 5.01286C2.01453 5.76087 2.25887 6.48858 2.71115 7.08436C2.71115 7.08436 2.80531 7.20833 2.82069 7.22622L5.46813 10.3485L8.11682 7.22466C8.13063 7.20802 8.2251 7.08436 8.2251 7.08436L8.22542 7.08342C8.67747 6.4879 8.9217 5.76052 8.92062 5.01286C8.91954 4.09753 8.55545 3.22 7.90822 2.57277C7.26098 1.92553 6.38345 1.56144 5.46813 1.56036ZM5.46813 6.26831C5.21982 6.26831 4.97709 6.19468 4.77063 6.05673C4.56418 5.91878 4.40326 5.72271 4.30824 5.4933C4.21322 5.2639 4.18835 5.01147 4.2368 4.76793C4.28524 4.5244 4.40481 4.3007 4.58039 4.12512C4.75596 3.94954 4.97967 3.82997 5.2232 3.78153C5.46673 3.73309 5.71916 3.75795 5.94857 3.85297C6.17797 3.94799 6.37405 4.10891 6.512 4.31537C6.64995 4.52183 6.72358 4.76456 6.72358 5.01286C6.72316 5.3457 6.59076 5.66479 6.35541 5.90014C6.12005 6.13549 5.80097 6.2679 5.46813 6.26831Z" fill="black"/>
-                                        </g>
-                                        <defs>
-                                        <clipPath id="clip0_30_367">
-                                        <rect width="10.0436" height="10.0436" fill="white" transform="translate(0.446777 0.9328)"/>
-                                        </clipPath>
-                                        </defs>
-                                    </svg>
-                                    <p><%= pets[i].address.slice(0, 11) %></p>
-                                </div>
+                                
                             </div>
-                            
+                            <% if (pets[i].type === 'Lost') { %>
+                                <img class="badger" src="/image/Lostbadge.png" alt="">
+                            <% } else if (pets[i].type === 'Found') { %>
+                                <img class="badger" src="/image/Foundbadge.png" alt="">
+                            <% } else if (pets[i].type === 'Reunited') { %>
+                                <img class="badger" src="/image/Reunitedbadge.png" alt="">
+                            <% } %>
+                                <img class="paw" src="/image/paw.png" alt="">
                         </div>
-                        <% if (pets[i].type === 'Lost') { %>
-                            <img class="badger" src="/image/Lostbadge.png" alt="">
-                        <% } else if (pets[i].type === 'Found') { %>
-                            <img class="badger" src="/image/Foundbadge.png" alt="">
-                        <% } else if (pets[i].type === 'Reunited') { %>
-                            <img class="badger" src="/image/Reunitedbadge.png" alt="">
-                        <% } %>
-                            <img class="paw" src="/image/paw.png" alt="">
-                    </div>
+                    </a>
                     <% } %>
                     <div class="filter-card">
                         <div class="filter-card-wrapper">
