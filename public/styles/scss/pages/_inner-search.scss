@@ -80,8 +80,14 @@
         }
     }
     .pet-info{
-        p{
+        pre{
+            font-family: 'Open Sans', sans-serif;
             font-size:17px;
+            color: black;
+        }
+        p{
+        font-size:17px;
+        font-weight: 600;
             color: black;
         }
     }

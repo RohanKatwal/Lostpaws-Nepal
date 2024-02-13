@@ -232,7 +232,7 @@ router.get('/search', async (req, res) => {
                 ]
             });
         } else {
-            console.log("rohan")
+            // console.log("rohan")
             // If latitude, longitude, and radius are not provided, fetch pets matching other criteria
             pets = await Pet.find(query).sort({ createdAt: -1 });
         }
@@ -248,7 +248,7 @@ router.get('/search', async (req, res) => {
 router.get('/search-inner/:id',async (req, res)=>{
     const petId = req.params.id;
     const pet = await Pet.findById(petId);
-    console.log(pet)
+    // console.log(pet)
     res.render('home/search-inner.ejs', { auth: req.isAuthenticated(), user: req.user, pet:pet });
 })
 

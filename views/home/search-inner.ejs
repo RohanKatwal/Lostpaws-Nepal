@@ -3,10 +3,16 @@
     <%- include("../components/nav") %>
     <div class="container">
         <div class="claim-heading">
-            <p>My Name is Buck</p>
-            <button class="claim-btn">
-                I have found it
-            </button>
+            <p><%= pet.petname ? "My Name is " + pet.petname : 'Help me' %></p>
+                <% if (pet.type === 'Lost' || pet.type === 'Found') { %>
+                    <button class="claim-btn">
+                        <% if (pet.type === 'Lost') { %>
+                            I have found it
+                        <% } else if (pet.type === 'Found') { %>
+                            I have lost it
+                        <% } %>
+                    </button>
+                <% } %>
         </div>
         <div class="info">
             <div class="pet-n-reward">
@@ -109,17 +115,47 @@
             </div>
             <div class="pet-info">
                 <div>
-                    <p>Pet's Name:</p>
-                    <p>Age:</p>
-                    <p>Gender:</p>
-                    <p>Color:</p>
-                    <p>Owner's Name:</p>
-                    <p>Owner's Number:</p>
-                    <p>Lost Date:</p>
-                    <p>Address:</p>
-                    <p>Breed:</p>
-                    <p>Size:</p>
+                    <p><%= pet.type %> pet</p>
+                    <pre>Pet:                                <%= pet.pet %></pre>
+                    <% if (pet.petname) { %>
+                        <pre>Pet's Name:                 <%= pet.petname %></pre>
+                    <% } %>
+                    <% if (pet.age) { %>
+                        <pre>Age:                               <%= pet.age %></pre>
+                    <% } %>
+                    <% if (pet.gender) { %>
+                        <pre>Gender:                        <%= pet.gender %></pre>
+                    <% } %>
+                    <% if (pet.colour) { %>
+                        <pre>Color:                            <%= pet.colour %></pre>
+                    <% } %>
+                    <pre>Owner's Name:       </pre>
+                    <pre>Owner's Number:     </pre>
+                    <% if (pet.date) { %>
+                        <pre>Date:                             <%= pet.date.toString().split(' ').slice(0, 4).join(' ') %></pre>
+                    <% } %>
+                    <% if (pet.address) { %>
+                        <pre>Address:                       <%= 
+                            (function() {
+                                var addressParts = pet.address.split(',');
+                                if (addressParts.length >= 3) {
+                                    var firstPart = addressParts[1].trim();
+                                    var secondPart = addressParts[2].trim();
+                                    return firstPart + ', ' + secondPart;
+                                } else {
+                                    return pet.address;
+                                }
+                            })()
+                        %></pre>
+                    <% } %>
+                    <% if (pet.breed) { %>
+                        <pre>Breed:                           <%= pet.breed %></pre>
+                    <% } %>
+                    <% if (pet.size) { %>
+                        <pre>Size:                               <%= pet.size %></pre>
+                    <% } %>
                 </div>
+                
             </div>
         </div>
         <div class="pet-description">
