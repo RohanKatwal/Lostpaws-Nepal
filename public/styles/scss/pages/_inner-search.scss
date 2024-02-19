@@ -134,3 +134,173 @@
         }
     }
 }
+.attach{
+    display: flex;
+    justify-content: flex-end;
+    .attach-btn{
+        display: flex;
+        align-items: center;
+        gap:5px;
+        height: 40px;
+        border: none;
+        background-color: white;
+        border-radius: 5px;
+    p{
+        font-size: 15px;
+        font-weight:600;
+        color: #0A66C2;
+        margin: 0;
+    }
+    }
+}
+
+.post-user-comments{
+    .total-comments{
+        margin-bottom: 30px;
+        .user-comment-section{
+            display: flex;
+            align-items: center;
+            gap:15px;
+            width:700px;
+            .user-comment-profile{
+                height:51px;
+                width: 51px;
+                img{
+                    height: 100%;
+                    width: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+            .user-comments{
+                .username-date{
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    .username{
+                        font-size:17px;
+                        color: black;
+                        font-weight:500;
+                        margin-bottom: 0;
+                    }
+                    .date{
+                        font-size:14px;
+                        margin-bottom: 0;
+                    }
+                }
+                .comment{
+                    font-size:17px;
+                    color: black;
+                    margin-bottom: 0; 
+                }
+            }
+        }
+        .like-reply{
+            margin-left: 65px;
+            .like-btn{
+                border: none;
+                background-color: white;
+            }
+            .reply-btn{
+                margin-left: 25px;
+                border: none;
+                background-color: white;
+            }
+            .view-reply-btn{
+                margin-left: 25px;
+                border: none;
+                color: grey;
+                background-color: white;
+            }
+            .replies-section1{
+                margin-top: 10px;
+                margin-left: 45px;
+                .reply{
+                    display: flex;
+                    align-items: center;
+                    gap:10px;
+                    .reply-user-profile{
+                        height:39px;
+                        width: 39px;
+                        img{
+                            height:100%;
+                            width: 100%;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                    }
+                    input{
+                        width: 30%;
+                        height: 25px;
+                        padding: 12px 20px;
+                        box-sizing: border-box;
+                        border: 1px solid #d6dae1;
+                        border-radius: 5px;
+                        background-color: #f8f8f8;
+                    }
+                    button{
+                        margin-left: 10px;
+                        border: none;
+                        color: #0A66C2;
+                        background-color: white;
+                    }
+                    .username{
+                        margin-bottom:0;
+                        font-size:14px;
+                        color: black;
+                    }
+                    .reply-comment{
+                        margin-bottom:0;
+                        font-size:14px;
+                    }
+                }
+            }
+            .replies-section{
+                margin-top: 10px;
+                margin-left: 45px;
+                .reply{
+                    display: flex;
+                    align-items: center;
+                    gap:10px;
+                    margin-bottom: 13px;
+                    .reply-user-profile{
+                        height:39px;
+                        width: 39px;
+                        img{
+                            height:100%;
+                            width: 100%;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                    }
+                    
+                    .username{
+                        margin-bottom:0;
+                        font-size:14px;
+                        color: black;
+                    }
+                    .reply-comment{
+                        margin-bottom:0;
+                        font-size:14px;
+                    }
+                }
+                input{
+                    width: 30%;
+                    height: 25px;
+                    padding: 12px 20px;
+                    box-sizing: border-box;
+                    border: 1px solid #d6dae1;
+                    border-radius: 5px;
+                    background-color: #f8f8f8;
+                }
+                button{
+                    margin-left: 10px;
+                    border: none;
+                    color: #0A66C2;
+                    background-color: white;
+                }
+            }
+            
+        }
+    }
+}
