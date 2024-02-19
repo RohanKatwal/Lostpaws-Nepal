@@ -249,6 +249,7 @@ router.get('/search-inner/:id',async (req, res)=>{
     const petId = req.params.id;
     const pet = await Pet.findById(petId);
     // console.log(pet)
+    // console.log(req.user)
     res.render('home/search-inner.ejs', { auth: req.isAuthenticated(), user: req.user, pet:pet });
 })
 

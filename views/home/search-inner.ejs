@@ -174,7 +174,10 @@
             </div>
         </div>
         <hr>
+        <% if(user){%>
         <input type="text" id="userProfile" value="<%=user.profileImage%>" hidden>
+        <input type="text" id="userName" value="<%=user.name%>" hidden>
+        <% } %>
         <div class="attach">
                 <button class="attach-btn">
                     <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,6 +220,7 @@
                         <p class="comment">I HAVE SEEN THIS DOG AROUND NAXAL GROUND</p>
                     </div>
                 </div>
+                <% if(user){%>
                 <div class="like-reply">
                     <button class="like-btn">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,6 +244,7 @@
                     <div class="replies-section">
                     </div>
                 </div>
+                <% } %>
             </div>
             <div class="total-comments">
                 <div class="user-comment-section">
@@ -254,29 +259,31 @@
                         <p class="comment">It's SAD that even after all these years this dog is still being missing. We need more support</p>
                     </div>
                 </div>
-                <div class="like-reply">
-                    <button class="like-btn">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.75 16.5H3.75V7.5H0.75V16.5ZM17.25 8.25C17.25 7.425 16.575 6.75 15.75 6.75H11.0175L11.73 3.3225L11.7525 3.0825C11.7525 2.775 11.625 2.49 11.4225 2.2875L10.6275 1.5L5.6925 6.4425C5.415 6.7125 5.25 7.0875 5.25 7.5V15C5.25 15.825 5.925 16.5 6.75 16.5H13.5C14.1225 16.5 14.655 16.125 14.88 15.585L17.145 10.2975C17.2125 10.125 17.25 9.945 17.25 9.75V8.25Z" fill="black"/>
-                        </svg>
-                    </button>
-                    <button class="reply-btn">REPLY</button>
-                    <button class="view-reply-btn">View Replies</button>
-                    <div class="replies-section1" style="display: none;">
-                        <div class="reply">
-                            <div class="reply-user-profile">
-                                <img src="/image/test.jpeg" alt="">
-                            </div>
-                            <div>
-                                
-                                <p class="username">Rohan</p>
-                                <p class="reply-comment">This is reply test I have been doing</p>
+                <% if(user){%>
+                    <div class="like-reply">
+                        <button class="like-btn">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.75 16.5H3.75V7.5H0.75V16.5ZM17.25 8.25C17.25 7.425 16.575 6.75 15.75 6.75H11.0175L11.73 3.3225L11.7525 3.0825C11.7525 2.775 11.625 2.49 11.4225 2.2875L10.6275 1.5L5.6925 6.4425C5.415 6.7125 5.25 7.0875 5.25 7.5V15C5.25 15.825 5.925 16.5 6.75 16.5H13.5C14.1225 16.5 14.655 16.125 14.88 15.585L17.145 10.2975C17.2125 10.125 17.25 9.945 17.25 9.75V8.25Z" fill="black"/>
+                            </svg>
+                        </button>
+                        <button class="reply-btn">REPLY</button>
+                        <button class="view-reply-btn">View Replies</button>
+                        <div class="replies-section1" style="display: none;">
+                            <div class="reply">
+                                <div class="reply-user-profile">
+                                    <img src="/image/test.jpeg" alt="">
+                                </div>
+                                <div>
+                                    
+                                    <p class="username">Rohan</p>
+                                    <p class="reply-comment">This is reply test I have been doing</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="replies-section">
                     </div>
-                    <div class="replies-section">
                     </div>
-                </div>
+                    <% } %>
             </div>
             <div class="total-comments">
                 <div class="user-comment-section">
@@ -291,29 +298,31 @@
                         <p class="comment">I hope this pet get found as soon as possible</p>
                     </div>
                 </div>
-                <div class="like-reply">
-                    <button class="like-btn">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.75 16.5H3.75V7.5H0.75V16.5ZM17.25 8.25C17.25 7.425 16.575 6.75 15.75 6.75H11.0175L11.73 3.3225L11.7525 3.0825C11.7525 2.775 11.625 2.49 11.4225 2.2875L10.6275 1.5L5.6925 6.4425C5.415 6.7125 5.25 7.0875 5.25 7.5V15C5.25 15.825 5.925 16.5 6.75 16.5H13.5C14.1225 16.5 14.655 16.125 14.88 15.585L17.145 10.2975C17.2125 10.125 17.25 9.945 17.25 9.75V8.25Z" fill="black"/>
-                        </svg>
-                    </button>
-                    <button class="reply-btn">REPLY</button>
-                    <button class="view-reply-btn">View Replies</button>
-                    <div class="replies-section1" style="display: none;">
-                        <div class="reply">
-                            <div class="reply-user-profile">
-                                <img src="/image/test.jpeg" alt="">
-                            </div>
-                            <div>
-                                
-                                <p class="username">Rohan</p>
-                                <p class="reply-comment">This is reply test I have been doing</p>
+                <% if(user){%>
+                    <div class="like-reply">
+                        <button class="like-btn">
+                            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.75 16.5H3.75V7.5H0.75V16.5ZM17.25 8.25C17.25 7.425 16.575 6.75 15.75 6.75H11.0175L11.73 3.3225L11.7525 3.0825C11.7525 2.775 11.625 2.49 11.4225 2.2875L10.6275 1.5L5.6925 6.4425C5.415 6.7125 5.25 7.0875 5.25 7.5V15C5.25 15.825 5.925 16.5 6.75 16.5H13.5C14.1225 16.5 14.655 16.125 14.88 15.585L17.145 10.2975C17.2125 10.125 17.25 9.945 17.25 9.75V8.25Z" fill="black"/>
+                            </svg>
+                        </button>
+                        <button class="reply-btn">REPLY</button>
+                        <button class="view-reply-btn">View Replies</button>
+                        <div class="replies-section1" style="display: none;">
+                            <div class="reply">
+                                <div class="reply-user-profile">
+                                    <img src="/image/test.jpeg" alt="">
+                                </div>
+                                <div>
+                                    
+                                    <p class="username">Rohan</p>
+                                    <p class="reply-comment">This is reply test I have been doing</p>
+                                </div>
                             </div>
                         </div>
+                        <div class="replies-section">
+                        </div>
                     </div>
-                    <div class="replies-section">
-                    </div>
-                </div>
+                    <% } %>
             </div>
         </div>
         
@@ -338,13 +347,73 @@ function showImage(imageSrc) {
     largeImage.src = imageSrc;
 }
 
+
 // function showImage(imageSrc) {
 //     var largeImage = document.getElementById('largeImage');
 //     largeImage.src = imageSrc;
 // }
 var profileImageSrc = $('#userProfile').val();
+var username = $('#userName').val();
+
+//above comment part
+document.addEventListener("DOMContentLoaded", function() {
+    const commentBtn = document.querySelector('.comment-btn');
+    const commentTextArea = document.querySelector('.comment-section textarea');
+    const totalComments = document.querySelector('.post-user-comments');
+
+    commentBtn.addEventListener('click', function() {
+        const commentText = commentTextArea.value.trim();
+
+        if (commentText !== '') {
+            const profileImageSrc = $('#userProfile').val();
+            const username = $('#userName').val();
+
+            if (!username || !profileImageSrc) {
+                // Redirect to login page
+                window.location.href = '/login'; // Change 'login.html' to your actual login page URL
+                return;
+            }
+            
+            const newComment = createCommentElement(commentText);
+            totalComments.insertBefore(newComment, totalComments.firstChild);
+            // Clear textarea after adding comment
+            commentTextArea.value = '';
+        }
+    });
+
+    function createCommentElement(commentText) {
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        const newComment = document.createElement('div');
+        newComment.classList.add('total-comments');
+
+        newComment.innerHTML = `
+        <div class="user-comment-section">
+            <div class="user-comment-profile">
+                <img src="${profileImageSrc}" alt="">
+            </div>
+            <div class="user-comments">
+                <div class="username-date">
+                    <p class="username">${username}</p>
+                    <p class="date">${currentDate}</p>
+                </div>
+                <p class="comment">${commentText}</p>
+            </div>
+        </div>
+        `;
+
+        return newComment;
+    }
+});
 
 
+
+
+//reply and like
 document.querySelectorAll('.view-reply-btn').forEach(btn => {
     btn.addEventListener("click", function() {
         const repliesSection = btn.nextElementSibling;
@@ -393,7 +462,7 @@ replyButtons.forEach(btn => {
                             <img src="${profileImageSrc}" alt="">
                         </div>
                         <div>
-                            <p class="username">Your Username</p>
+                            <p class="username">${username}</p>
                             <p class="reply-comment">${replyText}</p>
                         </div>
                     `;
