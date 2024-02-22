@@ -25,9 +25,9 @@
                     <% pet.images.forEach(function(image) { %>
                         <img class="thumbnail" src="/<%= image.path %>" alt="Thumbnail" onclick="showImage('/<%= image.path %>')">
                     <% }); %>
-                    <img class="thumbnail" src="/image/test.jpeg" alt="Thumbnail 1" onclick="showImage('/image/test.jpeg')">
+                    <!-- <img class="thumbnail" src="/image/test.jpeg" alt="Thumbnail 1" onclick="showImage('/image/test.jpeg')">
                     <img class="thumbnail" src="/image/register.png" alt="Thumbnail 1" onclick="showImage('/image/register.png')">
-                    <img class="thumbnail" src="/image/login-bg.png" alt="Thumbnail 2" onclick="showImage('/image/login-bg.png')">
+                    <img class="thumbnail" src="/image/login-bg.png" alt="Thumbnail 2" onclick="showImage('/image/login-bg.png')"> -->
                     <!-- Add more thumbnail images as needed -->
                 </div>
 
@@ -370,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             if (!username || !profileImageSrc) {
                 // Redirect to login page
-                window.location.href = '/login'; // Change 'login.html' to your actual login page URL
+                window.location.href = '/login';
                 return;
             }
             

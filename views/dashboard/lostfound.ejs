@@ -407,12 +407,21 @@ function ImgUpload() {
         formData.append('description',description)
         formData.append('address',address)
        
+        var petImages = $("#petImg").prop('files');
 
+      // Iterate over the selected files and append each one
+      for (var i = 0; i < petImages.length; i++) {
+          formData.append('petImg', petImages[i]);
+      }
 
-        $('.upload__img-box').each(function () {
-        var petImage = $("#petImg").prop('files')[0];
-        formData.append('petImg', petImage);
-        });
+      //   $('.upload__img-box').each(function () {
+      //   var petImage = $("#petImg").prop('files');
+      //   console.log(petImage);
+      //   for (var i = 0; i < petImage.length; i++) {
+      //     formData.append('petImg', petImage[i]); 
+      // }
+      //   // formData.append('petImg', petImage);
+      //   });
         console.log(...formData)
         return fetch('/dashboard/lostfound',{
         method: 'POST',

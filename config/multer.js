@@ -24,7 +24,14 @@ const uploadImg = multer({
 })
 
 const uploaduserImages = uploadImg.fields([{name: 'profile'}])
-const uploadPetImages = uploadImg.fields([{name: 'petImg'}])
+const uploadPetImages = multer({
+    storage: storage,
+    limits: { fileSize: 50 * 1024 * 1024 },
+    fileFilter: function (req, file, cb) {
+        checkFileType(file, cb);
+    }
+}).array('petImg', 10); // '10' here represents the maximum number of files allowed
+
 
 //check file type
 function checkFileType(file, cb) {

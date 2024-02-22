@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const Schema = mongoose.Schema;
 const petSchema = new mongoose.Schema({
   type: {
     type: String,
@@ -35,6 +35,7 @@ const petSchema = new mongoose.Schema({
     }
   },
   geohash: String,
+  userId: { type: Schema.Types.ObjectId },
   images: [
     {
       path: {
