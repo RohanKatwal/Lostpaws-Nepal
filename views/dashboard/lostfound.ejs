@@ -409,55 +409,10 @@ function ImgUpload() {
         formData.append('reward',reward)
         formData.append('description',description)
         formData.append('address',address)
-       
-      //   var petImages = $("#petImg").prop('files');
 
-      // // Iterate over the selected files and append each one
-      // for (var i = 0; i < petImages.length; i++) {
-      //     formData.append('petImg', petImages[i]);
-      // }
-
-      //   $('.upload__img-box').each(function () {
-      //   var petImage = $("#petImg").prop('files');
-      //   console.log(petImage);
-      // //   for (var i = 0; i < petImage.length; i++) {
-      // //     formData.append('petImg', petImage[i]); 
-      // // }
-      //   formData.append('petImg', petImage);
-      //   });
-       // Iterate through each .upload__img-box
-
-       
-// Get all file inputs with the class .upload__inputfile
-// var petInputs = $(".upload__inputfile");
-// console.log(petInputs)
-// petInputs.each(function () {
-//     // Get the files from the current file input
-//     var petImages = $(this).prop('files');
-
-//     // Check if the input has files
-//     if (petImages) {
-//         console.log("Number of files in this box:", petImages.length);
-
-//         // Iterate through the selected files and append each one
-//         for (var i = 0; i < petImages.length; i++) {
-//             console.log("Appending file:", petImages[i]);
-//             formData.append('petImg', petImages[i]);
-//         }
-//     } else {
-//         console.error("petImg input has no 'files' property.");
-//     }
-// });
-
-// var petImages = $("#petImg")[0].files;
-// console.log(petImages);
-// for (var i = 0; i < petImages.length; i++) {
-//     formData.append('petImg', petImages[i]);
-// }
-
-imgArray.forEach(function(item) {
-    formData.append('petImg', item);
-});
+        imgArray.forEach(function(item) {
+            formData.append('petImg', item);
+        });
 
 
 
