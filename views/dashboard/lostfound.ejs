@@ -189,10 +189,10 @@ if (selectedType === "Found") {
     jQuery(document).ready(function () {
   ImgUpload();
 });
-
+var imgArray = [];
 function ImgUpload() {
   var imgWrap = "";
-  var imgArray = [];
+
 
   $('.upload__inputfile').each(function () {
     $(this).on('change', function (e) {
@@ -221,6 +221,7 @@ function ImgUpload() {
             return false;
           } else {
             imgArray.push(f);
+            console.log("imgArray",imgArray);
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -246,7 +247,9 @@ function ImgUpload() {
     $(this).parent().remove();
   });
 }
-    //Map
+
+
+//Map
     var map = L.map('map').setView([0, 0], 2);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -407,21 +410,57 @@ function ImgUpload() {
         formData.append('description',description)
         formData.append('address',address)
        
-        var petImages = $("#petImg").prop('files');
+      //   var petImages = $("#petImg").prop('files');
 
-      // Iterate over the selected files and append each one
-      for (var i = 0; i < petImages.length; i++) {
-          formData.append('petImg', petImages[i]);
-      }
+      // // Iterate over the selected files and append each one
+      // for (var i = 0; i < petImages.length; i++) {
+      //     formData.append('petImg', petImages[i]);
+      // }
 
       //   $('.upload__img-box').each(function () {
       //   var petImage = $("#petImg").prop('files');
       //   console.log(petImage);
-      //   for (var i = 0; i < petImage.length; i++) {
-      //     formData.append('petImg', petImage[i]); 
-      // }
-      //   // formData.append('petImg', petImage);
+      // //   for (var i = 0; i < petImage.length; i++) {
+      // //     formData.append('petImg', petImage[i]); 
+      // // }
+      //   formData.append('petImg', petImage);
       //   });
+       // Iterate through each .upload__img-box
+
+       
+// Get all file inputs with the class .upload__inputfile
+// var petInputs = $(".upload__inputfile");
+// console.log(petInputs)
+// petInputs.each(function () {
+//     // Get the files from the current file input
+//     var petImages = $(this).prop('files');
+
+//     // Check if the input has files
+//     if (petImages) {
+//         console.log("Number of files in this box:", petImages.length);
+
+//         // Iterate through the selected files and append each one
+//         for (var i = 0; i < petImages.length; i++) {
+//             console.log("Appending file:", petImages[i]);
+//             formData.append('petImg', petImages[i]);
+//         }
+//     } else {
+//         console.error("petImg input has no 'files' property.");
+//     }
+// });
+
+// var petImages = $("#petImg")[0].files;
+// console.log(petImages);
+// for (var i = 0; i < petImages.length; i++) {
+//     formData.append('petImg', petImages[i]);
+// }
+
+imgArray.forEach(function(item) {
+    formData.append('petImg', item);
+});
+
+
+
         console.log(...formData)
         return fetch('/dashboard/lostfound',{
         method: 'POST',

@@ -47,12 +47,14 @@ router.get('/lostfound',loggedIn, async (req, res) => {
 router.post('/lostfound', loggedIn, uploadPetImages, async (req, res) => {
     console.log("Lostfound page activated");
     
-    const { type, pet, petname, gender, colour, breed, age,address, latitude, longitude,size,date,reward,description } = req.body;
-    // console.log(req.body);
+    const { type, pet, petname, gender, colour, breed, age,address, latitude, longitude,size,date,reward,description,petImg } = req.body;
+    console.log(req.body);
     
     // Assuming 'petImages' is an array of image paths from your client-side FormData
-    const petImages = req.files; 
-    console.log(petImages);
+    // const petImages = req.body.petImg; 
+    const petImages =req.files
+    // console.log(typeof petImages);
+    // console.log("this is pey",petImages);
     const geohashValue = geohash.encode(latitude, longitude);
     console.log('Encoded Geohash:', geohashValue);
     const location = {

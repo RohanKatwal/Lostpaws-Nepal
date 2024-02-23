@@ -30,14 +30,15 @@
                     <img class="thumbnail" src="/image/login-bg.png" alt="Thumbnail 2" onclick="showImage('/image/login-bg.png')"> -->
                     <!-- Add more thumbnail images as needed -->
                 </div>
-
+                <% if (pet.reward) { %>
                 <div class="pet-reward">
-                    <p>Reward: Nrs. 5000</p>
+                    <p>Reward: Nrs. <%= pet.reward %></p>
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.1071 7.66406L8.73606 0.455273C8.61887 0.172793 8.31418 5.84261e-09 7.98606 5.84261e-09H0.938988C0.180199 5.84261e-09 -0.263941 0.854297 0.17141 1.47539L6.69289 10.7859C8.43137 9.16406 10.6462 8.04492 13.1071 7.66406ZM14.9997 9.375C9.30149 9.375 4.68723 13.9893 4.68723 19.6875C4.68723 25.3857 9.30442 30 14.9997 30C20.695 30 25.3122 25.3857 25.3122 19.6875C25.3122 13.9893 20.7009 9.375 14.9997 9.375ZM20.4196 18.5918L18.2001 20.7598L18.7201 23.8213C18.8153 24.3633 18.2367 24.7881 17.7457 24.5244L14.9988 23.0818L12.2517 24.5215C11.761 24.7852 11.1823 24.3604 11.2773 23.8184L11.7973 20.7568L9.57775 18.5889C9.17551 18.1992 9.40402 17.5195 9.95481 17.4375L13.0239 16.9907L14.3962 14.209C14.5134 13.96 14.7551 13.8354 14.9968 13.8354C15.2385 13.8354 15.4802 13.9629 15.5974 14.209L16.9743 16.9922L20.0435 17.439C20.6013 17.5195 20.8239 18.1992 20.4196 18.5918ZM29.0095 5.84261e-09H22.0134C21.8515 -1.80707e-05 21.6923 0.0419097 21.5514 0.121697C21.4106 0.201485 21.2927 0.31641 21.2095 0.455273L16.8876 7.60957C19.3486 7.99043 21.5681 9.11074 23.3036 10.7373L29.8251 1.42676C30.2634 0.854297 29.8181 5.84261e-09 29.0095 5.84261e-09Z" fill="#FAFF00"/>
                         </svg>
                         
                 </div>
+                <% } %>
                 <div class="pet-contact-info">
                     <p>Contact me on:</p>
                     <div class="social-media">
@@ -129,7 +130,7 @@
                     <% if (pet.colour) { %>
                         <pre>Color:                            <%= pet.colour %></pre>
                     <% } %>
-                    <pre>Owner's Name:       </pre>
+                    <pre>Owner's Name:           <%= petowner.name %></pre>
                     <pre>Owner's Number:     </pre>
                     <% if (pet.date) { %>
                         <pre>Date:                             <%= pet.date.toString().split(' ').slice(0, 4).join(' ') %></pre>
@@ -160,8 +161,7 @@
         </div>
         <div class="pet-description">
             <p>
-                Bhunti is a stunning 8-year-old German Shepherd male that has gone missing since April 2022. He weighs about 80 pounds and has a beautiful, shiny black coat. Ringo has a very sweet temperament and is a very calm dog. He is a very affectionate dog, follows his person everywhere, loves to get petted . He loves going for walks and enjoys being outdoors. He used to live in a home with small- and large-size dogs and does really well with all of them, is crate-trained, housebroken and knows how to use a doggie door.
-                Bhunti walks well on leash but will need some basic obedience training with his future owner. He did well at the groomer’s and really well at the vet’s during his exam. Ringo likes going on car rides and has no problem jumping into the back of a SUV. When left alone he is quiet and not destructive. He is not a fence jumper and not a digger, either.
+                <%= pet.description %>
             </p>
         </div>
         <div class="comment-section">

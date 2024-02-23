@@ -248,9 +248,11 @@ router.get('/search', async (req, res) => {
 router.get('/search-inner/:id',async (req, res)=>{
     const petId = req.params.id;
     const pet = await Pet.findById(petId);
+    const petowner = await User.findById(pet.userId)
+    // console.log(petowner);
     // console.log(pet)
     // console.log(req.user)
-    res.render('home/search-inner.ejs', { auth: req.isAuthenticated(), user: req.user, pet:pet });
+    res.render('home/search-inner.ejs', { auth: req.isAuthenticated(), user: req.user, pet:pet, petowner:petowner });
 })
 
 
