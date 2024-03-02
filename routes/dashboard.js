@@ -1,6 +1,7 @@
 const router =require('express').Router();
 const {uploadUserImages, uploadPetImages}= require('../config/multer');
 const Pet = require('../models/pet')
+const User = require('../models/user')
 var geohash = require('ngeohash');
 
 function loggedIn(req,res,next){
@@ -103,7 +104,36 @@ router.post('/lostfound', loggedIn, uploadPetImages, async (req, res) => {
 });
 
 router.get('/profile',loggedIn, async (req, res) => {
-    res.render('dashboard/profile.ejs',{user:req.user});
+    const petpost= await Pet.find({userId: req.user.id}).sort({ createdAt: -1 })
+    // console.log(petpost)
+    res.render('dashboard/profile.ejs',{user:req.user, petpost:petpost});
 });
+
+
+router.get('/lostfound/:id/delete', loggedIn, async (req, res) => {
+    try {
+        console.log(req.params.id);
+        const result = await Pet.findByIdAndDelete(req.params.id);
+        if (!result) {
+            console.log("Post not found");
+            return res.status(404).send("Post not found");
+        }
+        console.log("Post has been deleted");
+        res.redirect("back");
+    } catch (error) {
+        console.error("Error deleting post:", error);
+        res.status(500).send("Error deleting post");
+    }
+});
+
+router.get('/lostfound/update/:id/',loggedIn,async(req, res)=>{
+    const Upost = await Pet.find({_id: req.params.id})
+    Upost[0].images.forEach(function(image) {
+        image.path = image.path.replace(/\\/g, '/');
+    });
+    // console.log(Upost)
+    res.render('dashboard/update-lostfound.ejs',{user:req.user, Upost:Upost})
+
+})
 
 module.exports=router;

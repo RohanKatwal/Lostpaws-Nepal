@@ -9,20 +9,20 @@
             <div class="profile-section">
                 <div class="profile-info">
                     <div class="profile-img">
-                        <img src="/image/profile.jpg" alt="">
+                        <img src="<%=user.profileImage %>" alt="">
                     </div>
                     <div class="pinfo">
-                        <p class="n1">Juliet Smith</p>
+                        <p class="n1"><%=user.name %></p>
                         <p class="n1">9818547973</p>
                         <p class="n2">Kathmandu, Bagmati, Nepal</p>
-                        <p class="n2">Juletsmith@gmail.com</p>
+                        <p class="n2"><%=user.email %></p>
                         <button>Change Profile Picture</button>
                     </div>
                 </div>
                 <div class="post-blog">
                     <div class="lfpost">
                         <div class="lfnum">
-                            <p class="n3">19</p>
+                            <p class="n3"><%=petpost.length %></p>
                             <p class="title">Lost Found Post</p>
                         </div>
                         <div class="lfpaw">
@@ -63,20 +63,29 @@
 
                 </div>
                 <div class="post-section">
+                    <% for(var i=0; i < petpost.length; i++){ %>
                     <div class="post">
+                        <a href="/search-inner/<%= petpost[i].id %>">
                         <div class="post-img">
-                            <img src="/image/test.jpeg" alt="">
+                            <img src="/<%=petpost[i].images[0].path %>" alt="">
                         </div>
+                    </a>
                         <div class="post-info">
                             <div class="p1">
-                                <p>Bhunti</p>
+                                <p><%= petpost[i].petname ? petpost[i].petname : petpost[i].pet %></p>
+                                <% if (petpost[i].type === 'Lost') { %>
                                 <p style="color:red">Lost</p>
+                                <% } else if (petpost[i].type === 'Found') { %>
+                                <p style="color:green">Found</p>
+                                <% } else if (pets[i].type === 'Reunited') { %>
+                                <p style="color:blue">Found</p>
+                                <% } %>
                             </div>
                             <div class="p2">
                                 <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M7.50001 0.187256C5.76844 0.189299 4.10838 0.878067 2.88397 2.10247C1.65957 3.32688 0.9708 4.98694 0.968757 6.71851C0.966683 8.13355 1.4289 9.51019 2.28451 10.6373C2.28451 10.6373 2.46263 10.8718 2.49173 10.9056L7.50001 16.8123L12.5107 10.9027C12.5368 10.8712 12.7155 10.6373 12.7155 10.6373L12.7161 10.6355C13.5713 9.5089 14.0333 8.1329 14.0313 6.71851C14.0292 4.98694 13.3404 3.32688 12.116 2.10247C10.8916 0.878067 9.23158 0.189299 7.50001 0.187256ZM7.50001 9.09351C7.03028 9.09351 6.5711 8.95421 6.18053 8.69325C5.78996 8.43228 5.48555 8.06135 5.30579 7.62738C5.12604 7.1934 5.079 6.71587 5.17064 6.25517C5.26228 5.79446 5.48848 5.37128 5.82063 5.03913C6.15278 4.70698 6.57596 4.48078 7.03667 4.38914C7.49737 4.2975 7.97491 4.34453 8.40888 4.52429C8.84286 4.70405 9.21378 5.00846 9.47475 5.39903C9.73572 5.78959 9.87501 6.24878 9.87501 6.71851C9.87422 7.34815 9.62375 7.95179 9.17852 8.39702C8.73329 8.84225 8.12966 9.09272 7.50001 9.09351Z" fill="#333333"/>
                                 </svg>
-                                <p>Kapan</p>  
+                                <p><%= petpost[i].address.slice(0, 11) %></p>  
                             </div>
                             <div class="p3">
                                 <div class="p4">
@@ -85,17 +94,17 @@
                                     </svg>
                                     <p>Comments: 4</p>
                                 </div>
-                                <button onclick="opentt()">
+                                <button id="openButton<%= i %>">
 
                                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 15.6625C9 15.331 9.1317 15.013 9.36612 14.7786C9.60054 14.5442 9.91848 14.4125 10.25 14.4125C10.5815 14.4125 10.8995 14.5442 11.1339 14.7786C11.3683 15.013 11.5 15.331 11.5 15.6625C11.5 15.994 11.3683 16.3119 11.1339 16.5464C10.8995 16.7808 10.5815 16.9125 10.25 16.9125C9.91848 16.9125 9.60054 16.7808 9.36612 16.5464C9.1317 16.3119 9 15.994 9 15.6625ZM9 10.6625C9 10.331 9.1317 10.013 9.36612 9.77859C9.60054 9.54417 9.91848 9.41248 10.25 9.41248C10.5815 9.41248 10.8995 9.54417 11.1339 9.77859C11.3683 10.013 11.5 10.331 11.5 10.6625C11.5 10.994 11.3683 11.3119 11.1339 11.5464C10.8995 11.7808 10.5815 11.9125 10.25 11.9125C9.91848 11.9125 9.60054 11.7808 9.36612 11.5464C9.1317 11.3119 9 10.994 9 10.6625ZM9 5.66248C9 5.33095 9.1317 5.01301 9.36612 4.77859C9.60054 4.54417 9.91848 4.41248 10.25 4.41248C10.5815 4.41248 10.8995 4.54417 11.1339 4.77859C11.3683 5.01301 11.5 5.33095 11.5 5.66248C11.5 5.994 11.3683 6.31194 11.1339 6.54636C10.8995 6.78078 10.5815 6.91248 10.25 6.91248C9.91848 6.91248 9.60054 6.78078 9.36612 6.54636C9.1317 6.31194 9 5.994 9 5.66248Z" fill="#333333"/>
                                     </svg>
                                 </button>
-                                <div id="popupss" class="popupss">
-                                    <button class="btn1">
+                                <div id="popupss<%= i %>" class="popupss">
+                                    <button class="btn1" onclick="updatePost('<%= petpost[i].id %>')">
                                         Edit
                                     </button>
-                                    <button class="btn2">
+                                    <button class="btn2" onclick="deletePost('<%= petpost[i].id %>')">
                                         Delete
                                     </button>
                                 </div>
@@ -103,6 +112,7 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
             </div>
 
@@ -111,8 +121,47 @@
 </body>
 <script src="/js/dashboard/home.js"></script>
 <script>
-function opentt() {
-        document.getElementById('popupss').classList.toggle('active');
-    }
+document.addEventListener("DOMContentLoaded", function() {
+    var buttons = document.querySelectorAll('[id^="openButton"]');
+    buttons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var index = parseInt(this.id.replace("openButton", ""));
+            opentt(index);
+        });
+    });
+});
+
+function opentt(index) {
+    document.getElementById('popupss' + index).classList.toggle('active'); // Use index to select the specific popup
+}
+
+const deletePost= (id)=>{
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+          },
+          buttonsStyling: false
+        })
+    
+        swalWithBootstrapButtons.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes, delete it!',
+          cancelButtonText: 'No, cancel!',
+          reverseButtons: true
+        }).then((result)=>{
+          if (result.isConfirmed) {
+            location.href= "/dashboard/lostfound/"+id+"/delete"
+          } 
+          
+        })
+      }
+
+      const updatePost = (id)=>{
+        location.href= "/dashboard/lostfound/update/"+id
+      }
 </script>
 </html>

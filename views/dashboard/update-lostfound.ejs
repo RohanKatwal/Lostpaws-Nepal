@@ -11,71 +11,73 @@
         <div class="container">
             <form action="" class="lostform" enctype="multipart/form-data" id="petForm">
                 <div class="lostform-content">
+                  <input id="id" type="text" value="<%= Upost[0]._id %>" hidden>
                     <div class="space">
                         <label for="">Type <span style="color: red;">*</span></label>
-                        <select palceholder="Dog" id="type">
-                            <option value="Found">Found</option>
-                            <option value="Lost" selected>Lost</option>
-                        </select>
+                        <select id="type">
+                          <option value="Found" <% if(Upost[0].type === "Found") { %>selected<% } %>>Found</option>
+                          <option value="Lost" <% if(Upost[0].type === "Lost") { %>selected<% } %>>Lost</option>
+                          <option value="Reunited" <% if(Upost[0].type === "Reunited") { %>selected<% } %>>Reunited</option>
+                      </select>
                     </div>
                     <div class="space">
                         <label for="">Pet <span style="color: red;">*</span></label>
-                        <select palceholder="Dog" id="pet">
-                            <option value="Dog">Dog</option>
-                            <option value="Cat">Cat</option>
-                            <option value="Bird">Bird</option>
-                            <option value="Rabbit">Rabbit</option>
-                            <option value="Hamster">Hamster</option>
-                            <option value="Horse">Horse</option>
-                        </select>
+                        <select placeholder="Dog" id="pet">
+                          <option value="Dog" <%= Upost[0].pet === 'Dog' ? 'selected' : '' %>>Dog</option>
+                          <option value="Cat" <%= Upost[0].pet === 'Cat' ? 'selected' : '' %>>Cat</option>
+                          <option value="Bird" <%= Upost[0].pet === 'Bird' ? 'selected' : '' %>>Bird</option>
+                          <option value="Rabbit" <%= Upost[0].pet === 'Rabbit' ? 'selected' : '' %>>Rabbit</option>
+                          <option value="Hamster" <%= Upost[0].pet === 'Hamster' ? 'selected' : '' %>>Hamster</option>
+                          <option value="Horse" <%= Upost[0].pet === 'Horse' ? 'selected' : '' %>>Horse</option>
+                      </select>                      
                     </div>
                     <div class="space hidden">
                         <label for="">Pet Name</label>
-                        <input id="petname" type="text" placeholder="Enter a pet name">
+                        <input id="petname" type="text" placeholder="Enter a pet name" value="<%= Upost[0].petname %>">
                     </div>
                     <div class="space ">
                         <label for="">Gender</label>
-                        <select palceholder="Male" id="gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Unknown">Unknown</option>
-                        </select>
+                        <select id="gender">
+                          <option value="Male" <% if(Upost[0].gender === "Male") { %>selected<% } %>>Male</option>
+                          <option value="Female" <% if(Upost[0].gender === "Female") { %>selected<% } %>>Female</option>
+                          <option value="Unknown" <% if(Upost[0].gender === "Unknown") { %>selected<% } %>>Unknown</option>
+                      </select>
                     </div>
                     <div class="space">
                         <label for="">Color <span style="color: red;">*</span></label>
-                        <input id="color" type="text" placeholder="Enter a pet Color">
+                        <input id="color" type="text" placeholder="Enter a pet Color" value="<%= Upost[0].colour %>">
                         <p class="error color-error"></p>
                       </div>
                     <div class="space hidden">
                         <label for="">Age</label>
-                        <input id="age" type="number" placeholder="Enter a pet age">
+                        <input id="age" type="number" placeholder="Enter a pet age" value="<%= Upost[0].age %>">
                     </div>
                     <div class="space hidden">
                         <label for="">Breed</label>
-                        <input id="breed" type="text" placeholder="Enter a pet breed">
+                        <input id="breed" type="text" placeholder="Enter a pet breed" value="<%= Upost[0].breed %>">
                     </div>
                     <div class="space">
                         <label for="">Size</label>
-                        <select palceholder="Small" id="size">
-                            <option value="Small">Small</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Large">Large</option>
-                        </select>
+                        <select placeholder="Small" id="size">
+                          <option value="Small" <%= Upost[0].size === 'Small' ? 'selected' : '' %>>Small</option>
+                          <option value="Medium" <%= Upost[0].size === 'Medium' ? 'selected' : '' %>>Medium</option>
+                          <option value="Large" <%= Upost[0].size === 'Large' ? 'selected' : '' %>>Large</option>
+                      </select>                      
                     </div>
                     <div class="space">
                         <label for="">Date <span style="color: red;">*</span></label>
-                        <input id="date" type="date" placeholder="">
+                        <input id="date" type="date" placeholder="" value="<%= Upost[0].date %>">
                         <p class="error date-error"></p>
                     </div>
                 </div>
                 <div class="lostform-content2">
                     <div class="space2">
                         <label for="">Location</label>
-                        <input id="location" type="text" placeholder="Enter a Location">
+                        <input id="location" type="text" placeholder="Enter a Location" value="<%= Upost[0].address %>">
                     </div>
                     <div class="space2 hidden">
                       <label for="reward">Reward</label>
-                      <input type="number" placeholder="0.00" id="reward" step="0.100">
+                      <input type="number" placeholder="0.00" id="reward" step="0.100" value="<%= Upost[0].reward %>">
                       
                     </div>
                 </div>
@@ -87,7 +89,7 @@
                 </div>
                 <div class="description">
                     <label for="">Description <span style="color: red;">*</span></label>
-                    <textarea id="description" type="text"></textarea>
+                    <textarea id="description" type="text"><%= Upost[0].description %></textarea>
                     <p class="error description-error"></p>
                 </div>
                 <div class="upload__box">
@@ -104,7 +106,15 @@
                         <input type="file" multiple="" data-max_length="20" id="petImg" name="petImg" class="upload__inputfile" accept="image/*" capture="camera">
                       </label>
                     </div>
-                    <div class="upload__img-wrap"></div>
+                    <div class="upload__img-wrap">
+                      <% Upost[0].images.forEach(function(image) { %>
+                        <div class="upload__img-box">
+                          <div style="background-image: url('/<%= image.path %>')" class="img-bg"></div>
+                          <div class='upload__img-close'>
+                          </div>
+                          </div>
+                        <% }); %>
+                    </div>
                   </div>
                 <div class="submit-cancel-btn">
 
@@ -237,16 +247,6 @@ function ImgUpload() {
     });
   });
 
-  // $('body').on('click', ".upload__img-close", function (e) {
-  //   var file = $(this).parent().data("file");
-  //   for (var i = 0; i < imgArray.length; i++) {
-  //     if (imgArray[i].name === file) {
-  //       imgArray.splice(i, 1);
-  //       break;
-  //     }
-  //   }
-  //   $(this).parent().remove();
-  // });
   $('body').on('click', ".upload__img-close", function (e) {
     var fileName = $(this).prev('.img-bg').data("file");
     imgArray = imgArray.filter(function(item) {
@@ -428,7 +428,7 @@ function ImgUpload() {
 
 
         console.log(...formData)
-        return fetch('/dashboard/lostfound',{
+        return fetch('/dashboard/lostfound/update',{
         method: 'POST',
         body:formData
         }).then(res=>res.json())
@@ -447,7 +447,7 @@ function ImgUpload() {
                 if(data.title == 'success'){
                     Toast.fire({
                         title: 'Success!',
-                        text: 'Posted successfully',
+                        text: 'Post Updated successfully',
                         icon: 'success',
                     }).then(() => {
                         window.location.reload()
