@@ -1,0 +1,180 @@
+.profile-section{
+    display: flex;
+    align-items: center;
+    gap: 33px;
+    .profile-info{
+        display: flex;
+        align-items: center;
+        gap:30px;
+        .profile-img{
+            height:200px;
+            width: 200px;
+            img{
+                height:100%;
+                width: 100%;
+                border-radius:  50%;
+            }
+        }
+        .pinfo{
+            .n1{
+                font-size:18px;
+                color: black;
+                font-weight: 500;
+                margin: 0;
+            }
+            .n2{
+                margin: 0;
+                font-weight: 500;
+            }
+            button{
+                color:#0A66C2;
+                background: none;
+                border:none;
+            }
+        }
+    }
+    .post-blog{
+        display: flex;
+        flex-direction: column;
+        gap:21px;
+        .lfpost{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 300px;
+            padding:10px 15px;
+            border-radius: 11px;
+            background-color: #fff;
+            box-shadow:3px 5px 40px #E1E1ED;
+            .n3{
+                color: #0A66C2;
+                margin:0;
+                font-weight: 500;
+            }
+            .title{
+                color:#333333;
+                opacity: 80%;
+                font-size:20px;
+                font-weight: 500;
+                margin:0;
+            }
+        }
+    }
+}
+.allpost{
+    margin-top:40px;
+    border:1px solid #b6c6d8c7;
+    background-color: #fff;
+    padding:16px;
+    .post-btn{
+        display: flex;
+        margin-bottom: 20px;
+        .paw-btn{
+            width: 100%;
+            border:none;
+            background:none;
+            text-align: left;
+            padding-bottom: 16px;
+        }
+        .active{
+            border-bottom:1px solid #0000002c;
+            
+        }
+    }
+    .post-section{
+        display: flex;
+        flex-wrap: wrap;
+        gap:28px;
+        .post{
+            width:277px;
+            box-shadow:2.47px 4.11px 32.88px #E1E1ED;
+            border-radius: 9px;
+            overflow:hidden;
+            .post-img{
+                height:237px;
+                width:277px;
+                
+                img{
+                    height:100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+            .post-info{
+                padding:8px;
+                .p1{
+                    display: flex;
+                    justify-content: space-between;
+                    p{
+                        font-weight: 500;
+                        margin: 0;
+                        color: black;
+                    }
+                }
+                .p2{
+                    display: flex;
+                    align-items: center;
+                    gap:7px;
+                    p{
+                        margin: 0;
+                        color: black;
+                        font-size:14px;
+                    }
+                }
+                .p3{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: relative;
+                    .p4{
+                        display: flex;
+                        align-items: center;
+                        gap:7px;
+                        p{
+                            margin: 0;
+                            color:black;
+                            font-size:14px;
+                        }
+                    }
+                    button{
+
+                            background: none;
+                            border: none;
+                        
+                    }
+                    .popupss{
+                        display: none;
+                        position: absolute;
+                        right:0;
+                        bottom:25px;
+                        
+                        
+                        &.active{
+                            display: block;
+                        }
+                        .btn1{
+                            background-color:#0A66C2;
+                            padding:2px;
+                            color:white;
+                            text-align:center;
+                            border:none;
+                            border-radius:5px;
+                            font-size: 12px;
+
+                        }
+                        .btn2{
+                            background-color:rgba(255, 0, 0, 0.712);
+                            padding:2px;
+                            color:white;
+                            text-align:center;
+                            border:none;
+                            border-radius:5px;
+                            font-size: 12px;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

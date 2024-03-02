@@ -102,4 +102,8 @@ router.post('/lostfound', loggedIn, uploadPetImages, async (req, res) => {
     }
 });
 
+router.get('/profile',loggedIn, async (req, res) => {
+    res.render('dashboard/profile.ejs',{user:req.user});
+});
+
 module.exports=router;
