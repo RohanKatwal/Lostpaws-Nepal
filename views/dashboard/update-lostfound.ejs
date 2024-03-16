@@ -66,7 +66,7 @@
                     </div>
                     <div class="space">
                         <label for="">Date <span style="color: red;">*</span></label>
-                        <input id="date" type="date" placeholder="" value="<%= Upost[0].date %>">
+                        <input id="date" type="date" placeholder="" value="">
                         <p class="error date-error"></p>
                     </div>
                 </div>
@@ -136,6 +136,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
+
+var dateString = '<%= Upost[0].date %>';
+
+// Convert the date string to a JavaScript Date object
+var date = new Date(dateString);
+
+// Format the date to 'YYYY-MM-DD' format expected by the HTML date input
+var formattedDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+// Set the formatted date as the value of the input field
+document.getElementById('date').value = formattedDate;
 
 //error control
 function showError(errorElement, errorMessage){
