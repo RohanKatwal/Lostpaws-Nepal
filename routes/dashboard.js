@@ -86,6 +86,13 @@ router.get('/profile',loggedIn, async (req, res) => {
     res.render('dashboard/profile.ejs',{user:req.user, petpost:petpost});
 });
 
+router.get('/settings',loggedIn, async (req, res) => {
+    // const User = await User.find({_Id: req.user.id})
+    // console.log(petpost)
+    console.log(req.user)
+    res.render('dashboard/settings.ejs',{user:req.user});
+});
+
 
 router.get('/lostfound/:id/delete', loggedIn, async (req, res) => {
     try {

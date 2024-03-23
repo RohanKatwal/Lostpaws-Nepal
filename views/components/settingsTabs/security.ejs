@@ -1,0 +1,144 @@
+<div class="addCompany-container">
+    <div class="welcome-section">
+        <div class="login-section m-auto m-lg-0">
+            <div class="login-titlecontainer">
+                <div class="loginheading">
+                    <h4 class="primary-p">Change password</h4>
+                </div>
+
+                <div class="logininner-inputsection companylogo-form mt-3">
+                    <form>
+                        <div class="emailpassword-container">
+                            <div>
+                                <label class="primary-p form-label" for="currentpassword">Current
+                                    Password</label>
+                                <div class="eye-button">
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Enter your password" />
+                                    <button type="button" onclick="togglePassWordView(this)" style="background: none;">
+                                        <img src="/image/icons/eye-hide.svg" class="eye-hide" alt="">
+                                        <img src="/image/icons/eye-show.svg" alt="" class="eye-show"
+                                            style="display: none;">
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="primary-p form-label" for="password">New Password</label>
+                                <div class="eye-button">
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Enter your password" />
+                                    <button type="button" onclick="togglePassWordView(this)" style="background: none;">
+                                        <img src="/image/icons/eye-hide.svg" class="eye-hide" alt="">
+                                        <img src="/image/icons/eye-show.svg" alt="" class="eye-show"
+                                            style="display: none;">
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="primary-p form-label" for="password">Confirm
+                                    Password</label>
+                                <div class="eye-button">
+                                    <input type="password" id="password" class="form-control" name="password"
+                                        placeholder="Enter your password" />
+                                    <button type="button" onclick="togglePassWordView(this)" style="background: none;">
+                                        <img src="/image/icons/eye-hide.svg" class="eye-hide" alt="">
+                                        <img src="/image/icons/eye-show.svg" alt="" class="eye-show"
+                                            style="display: none;">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                    <button class="saveBtn" id="PwchangeBtn" type="button" name="" value="">
+                        <div id="loading" class="loading" style="display: none;"></div>
+                        <span id="noloading" style="display: block;">Save Changes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $("#PwchangeBtn").on("click", (e) => {
+            e.preventDefault();
+            $('#noloading2').hide();
+            $('#loading2').show();
+            $("#PwchangeBtn").prop('disabled', true);
+            var oldpassword = $("#cPassword").val()
+            var newpassword = $("#newPassword").val()
+            var confirmPassword = $("#confirmPassword").val()
+            if (oldpassword == "" || newpassword == "" || confirmPassword == "") {
+                $("#PwchangeBtn").prop('disabled', false);
+                $('#loading2').hide();
+                $('#noloading2').show();
+                return Toast.fire({
+                    title: 'Error!',
+                    text: 'Please make sure all fields are filled',
+                    icon: 'error',
+                })
+            }
+
+            if (confirmPassword !== newpassword) {
+                $("#PwchangeBtn").prop('disabled', false);
+                $('#loading2').hide();
+                $('#noloading2').show();
+                return Toast.fire({
+                    title: 'Error!',
+                    text: 'New password didnot match',
+                    icon: 'error',
+                })
+            }
+
+            return fetch('/dashboard/admin/settings/security', {
+                method: 'POST',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify({ oldpassword, newpassword })
+            }).then(res => res.json(res))
+                .then(data => {
+                    console.log(data)
+                    if (data == "Wrgpass") {
+                        $('#PwchangeBtn').prop('disabled', false);
+                        $('#loading2').hide();
+                        $('#noloading2').show()
+                        return Toast.fire({
+                            title: 'Error!',
+                            text: 'Old password do not match',
+                            icon: 'error',
+                        })
+                    }
+                    if (data == "changesucess") {
+                        $('#PwchangeBtn').prop('disabled', false);
+                        $('#loading2').show();
+                        $('#noloading2').hide();
+
+                        Toast.fire({
+                            title: 'Success!',
+                            text: 'Password updated sucessfully',
+                            icon: 'success',
+                        }).then(() => {
+                            window.location.reload();
+                        })
+                    }
+
+                })
+        })
+
+        function togglePassWordView(element) {
+            const inputField = element.parentElement.querySelector("input")
+            const eyeHide = element.querySelector(".eye-hide")
+            const eyeShow = element.querySelector(".eye-show")
+
+            if(inputField.type === "password") {
+                inputField.type = "text"
+                eyeHide.style.display = "none"
+                eyeShow.style.display = "block"
+            } else if(inputField.type === "text") {
+                inputField.type = "password"
+                eyeHide.style.display = "block"
+                eyeShow.style.display = "none"
+            }
+        }
+
+    </script>

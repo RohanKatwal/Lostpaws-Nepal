@@ -1,0 +1,77 @@
+
+
+                        <div class="addCompany-container">
+                            <div class="companylogo-form mt-3">
+                                <form class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4" class="form-label">Facebook</label>
+                                        <input type="text" class="form-control" id="facebook" value="<%=user.facebook %>">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4" class="form-label">Instagram</label>
+                                        <input type="text" class="form-control" id="instagram" value="<%=user.instagram %>">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4" class="form-label">Linkedln</label>
+                                        <input type="text" class="form-control" id="linkedin" value="<%=user.linkedin %>">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="inputPassword4" class="form-label">Twitter</label>
+                                        <input type="text" class="form-control" id="twitter" value="<%=user.twitter %>">
+                                    </div>
+                                </form>
+                                <hr>
+                                <button class="saveBtn" id="saveSocialBtn" type="button" name="" value="">
+                                    <div id="loading" class="loading" style="display: none;"></div>
+                                    <span id="noloading" style="display: block;">Save Changes</span>
+                                </button>
+                            </div>
+                        </div>
+
+<script>
+     $("#saveSocialBtn").on("click", (e) => {
+            e.preventDefault();
+            $('#noloading2').hide();
+            $('#loading2').show();
+            $("#saveBtn").prop('disabled', true);
+
+
+            var facebook = $("#facebook").val();
+            var instagram = $("#instagram").val()
+            var youtube = $("#youtube").val();
+            var linkedin = $("#linkedin").val()
+            var twitter = $("#twitter").val();
+
+            return fetch('/dashboard/user/settings/socialMedia',{
+            method: 'POST',
+            headers: {'Content-type':'application/json'},
+            body:JSON.stringify({facebook,instagram,youtube,linkedin,twitter})
+            }).then(res => res.json())
+            .then(data => {
+                    if (data.title == 'error') {
+                        $('#saveBtn').prop('disabled', false);
+                        $('#loading').hide();
+                        $('#noloading').show();
+                        return Toast.fire({
+                            title: 'Error!',
+                            text: 'Something went wrong',
+                            icon: 'error',
+                        });
+                    }
+                    if (data.title == 'success') {
+                        Toast.fire({
+                            title: 'Success!',
+                            text: 'Social Media updated successfully',
+                            icon: 'success',
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    }
+                })
+            
+     })
+</script>
+
+
+
+

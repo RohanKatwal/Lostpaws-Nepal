@@ -1,0 +1,87 @@
+<%- include("../components/head") %>
+
+<body>
+	<%- include("../components/dashboard/sidebar") %>
+	<main>
+		<%- include("../components/dashboard/navbar") %>
+		<div class="d-flex superAdminPage">
+			<div class="dashboard-main-container">
+				<section class="main-admin-dashboard">
+					<div class="company-details">
+						<h3>Settings</h3>
+					</div>
+	
+					<div class="d-flex justify-content-between">
+						<div class="live-button d-flex justify-content-between gap-2">
+							<div>
+								<!-- TABS -->
+								<ul class="nav nav-pills gap-3" id="pills-tab" role="tablist">
+									<li class="nav-item" role="presentation">
+										<button
+											class="nav-link border active"
+											id="pills-home-tab"
+											data-bs-toggle="pill"
+											data-bs-target="#account"
+											type="button"
+											role="tab"
+											aria-selected="true"
+										>
+											Account
+										</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button
+											class="nav-link border"
+											id="pills-profile-tab"
+											data-bs-toggle="pill"
+											data-bs-target="#security"
+											type="button"
+											role="tab"
+											aria-selected="false"
+										>
+											Security
+										</button>
+									</li>
+									<li class="nav-item" role="presentation">
+										<button
+											class="nav-link border"
+											id="pills-contact-tab"
+											data-bs-toggle="pill"
+											data-bs-target="#social"
+											type="button"
+											role="tab"
+											aria-selected="false"
+										>
+											Social Media
+										</button>
+									</li>
+								</ul>
+	
+								<!-- DYNAMIC CONTENT FOR EACH TABS -->
+								<div class="tab-content" id="pills-tabContent">
+									<div
+										class="tab-pane fade show active"
+										id="account"
+										role="tabpanel"
+									>
+										<!-- CHECK editProfileTabs -->
+										<%- include('../components/settingsTabs/account.ejs') %>
+									</div>
+									<div class="tab-pane fade" id="security" role="tabpanel">
+										<!-- CHECK editProfileTabs -->
+										<%- include('../components/settingsTabs/security.ejs') %>
+									</div>
+									<div class="tab-pane fade" id="social" role="tabpanel">
+										<%- include('../components/settingsTabs/social-media.ejs') %>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</main>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

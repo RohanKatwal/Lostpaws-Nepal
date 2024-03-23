@@ -1,0 +1,119 @@
+<div class="addCompany-container">
+    <div class="companyName">
+        <p>Profile</p>
+    </div>
+    <div class="upload-company">
+        <div class="circle" id="circle">
+            <img id="logoPreviewImage" height="100" width="100" src="<%=user.profileImage %>" alt="" class="preview"
+                style="border-radius: 50%;">
+        </div>
+        <button class="upload" id="customUploadButton">Upload</button>
+        <input type="file" id="logo" name="logo" style="display: none;">
+    </div>
+
+    <div class="companylogo-form mt-3">
+        <form class="row g-3">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" value="<%=user.name %>">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" value="<%=user.email %>" disabled required>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" value="<%=user.phone %>">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Address</label>
+                <input type="text" class="form-control" id="location" value="<%=user.location %>">
+            </div>
+            <div class="col-md-12">
+                <label for="inputPassword4" class="form-label">Your Description</label>
+                <textarea type="text" class="form-control" id="googleMapIframe" value="<%=user.googleMapIframe %>" style="height: 100px"></textarea>
+            </div>
+        </form>
+        <hr>
+        <button class="saveBtn" id="saveBtn" type="button" name="" value="">
+            <div id="loading" class="loading" style="display: none;"></div>
+            <span id="noloading" style="display: block;">Save Changes</span>
+        </button>
+    </div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/toast.js"></script>
+<script>
+        const customUploadButton = document.getElementById("customUploadButton");
+        const fileInput2 = document.getElementById("logo");
+
+        customUploadButton.addEventListener("click", function () {
+            fileInput2.click();
+        });
+
+        document.getElementById('logo').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                // console.log("selected file", file);
+                const profilePhoto = document.querySelector('.preview');
+                profilePhoto.style.display = "block"
+                profilePhoto.src = URL.createObjectURL(file);
+            }
+        });
+
+        $("#saveBtn").on("click", (e) => {
+            e.preventDefault();
+            $('#noloading2').hide();
+            $('#loading2').show();
+            $("#saveBtn").prop('disabled', true);
+
+            var logoImage = $("#logo").prop('files')[0];
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var phone = $("#phone").val();
+            var location = $("#location").val();
+            var faxNo = $("#faxNo").val();
+            var poBox = $("#poBox").val();
+            var googleMapIframe = $("#googleMapIframe").val();
+
+            var formData = new FormData();
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('location', location);
+            formData.append('email',email);
+            formData.append('faxNo',faxNo);
+            formData.append('poBox',poBox);
+            formData.append('googleMapIframe',googleMapIframe);
+            formData.append('logo', logoImage);
+
+
+            return fetch('/dashboard/user/settings/account',{
+                method: 'POST',
+                body: formData,
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.title == 'error') {
+                        $('#saveBtn').prop('disabled', false);
+                        $('#loading').hide();
+                        $('#noloading').show()
+                        return Toast.fire({
+                            title: 'Error!',
+                            text: 'Something went wrong',
+                            icon: 'error',
+                        });
+                    }
+                    if (data.title == 'success') {
+                        Toast.fire({
+                            title: 'Success!',
+                            text: 'Account updated successfully',
+                            icon: 'success',
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    }
+                })
+        })
+</script>
