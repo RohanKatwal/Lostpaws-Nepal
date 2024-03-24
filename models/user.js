@@ -23,15 +23,17 @@ const userSchema = new mongoose.Schema({
     },
     phoneNumber: String,
     profileImage: {
-        type: String,
-        default: '/image/profile.jpg'
+      type: String,
+      default: '/image/profile.jpg'
     },
     role: { type: String, default: "user" },
     googleId: {
       type: String,
       unique: true,
       sparse: true // Allows null or unique values
-  },
+    },
+    address:String,
+    description:String,
     suspend: {type:Boolean,default:false},
     verificationCode:{type:String}
   }, {

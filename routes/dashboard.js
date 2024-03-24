@@ -1,5 +1,5 @@
 const router =require('express').Router();
-const {uploadUserImages, uploadPetImages}= require('../config/multer');
+const {uploaduserImages, uploadPetImages}= require('../config/multer');
 const Pet = require('../models/pet')
 const User = require('../models/user')
 var geohash = require('ngeohash');
@@ -86,14 +86,6 @@ router.get('/profile',loggedIn, async (req, res) => {
     res.render('dashboard/profile.ejs',{user:req.user, petpost:petpost});
 });
 
-router.get('/settings',loggedIn, async (req, res) => {
-    // const User = await User.find({_Id: req.user.id})
-    // console.log(petpost)
-    console.log(req.user)
-    res.render('dashboard/settings.ejs',{user:req.user});
-});
-
-
 router.get('/lostfound/:id/delete', loggedIn, async (req, res) => {
     try {
         console.log(req.params.id);
@@ -119,5 +111,57 @@ router.get('/lostfound/update/:id/',loggedIn,async(req, res)=>{
     res.render('dashboard/update-lostfound.ejs',{user:req.user, Upost:Upost})
 
 })
+
+router.get('/settings',loggedIn, async (req, res) => {
+    // console.log(req.user)
+    res.render('dashboard/settings.ejs',{user:req.user});
+});
+
+//Update account
+router.post('/user/settings/account', loggedIn, uploaduserImages, async (req, res) => {
+    try {
+        const { name, phoneNumber, email, address, description } = req.body;
+        console.log(req.body); // Check the received data in the console
+
+        const profileImg =
+        req.files && req.files.profile ? req.files.profile[0].path : null;
+        // Assuming you have access to userId from the loggedIn middleware
+        const userId = req.user.id;
+
+        const existingUser = await User.findById(userId);
+
+        if (!existingUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Update user settings
+        existingUser.name = name;
+        existingUser.phoneNumber = phoneNumber;
+        existingUser.email = email;
+        existingUser.address = address;
+        existingUser.description = description; // Assuming 'description' field exists in the User model
+
+
+        if (profileImg) {
+            existingUser.profileImage ="/"+profileImg ;
+        }
+        // Save the updated user settings
+        await existingUser.save();
+
+        var data = {
+            title: 'success',
+            message: 'User account updated successfully!',
+        };
+        return res.json(data);
+    } catch (error) {
+        console.error(error);
+        var data = {
+            title: 'error',
+        };
+        return res.json(data);
+    }
+});
+
+
 
 module.exports=router;

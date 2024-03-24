@@ -131,7 +131,7 @@
                         <pre>Color:                            <%= pet.colour %></pre>
                     <% } %>
                     <pre>Owner's Name:           <%= petowner.name %></pre>
-                    <pre>Owner's Number:     </pre>
+                    <pre>Owner's Number:       <%= petowner.phoneNumber %></pre>
                     <% if (pet.date) { %>
                         <pre>Date:                             <%= pet.date.toString().split(' ').slice(0, 4).join(' ') %></pre>
                     <% } %>
