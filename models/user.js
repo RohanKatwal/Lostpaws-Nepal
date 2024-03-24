@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
     },
     address:String,
     description:String,
+    facebook:String,
+    instagram:String,
+    linkedin:String,
+    twitter:String,
     suspend: {type:Boolean,default:false},
     verificationCode:{type:String}
   }, {

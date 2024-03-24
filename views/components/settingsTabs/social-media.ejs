@@ -38,14 +38,13 @@
 
             var facebook = $("#facebook").val();
             var instagram = $("#instagram").val()
-            var youtube = $("#youtube").val();
             var linkedin = $("#linkedin").val()
             var twitter = $("#twitter").val();
 
             return fetch('/dashboard/user/settings/socialMedia',{
             method: 'POST',
             headers: {'Content-type':'application/json'},
-            body:JSON.stringify({facebook,instagram,youtube,linkedin,twitter})
+            body:JSON.stringify({facebook,instagram,linkedin,twitter})
             }).then(res => res.json())
             .then(data => {
                     if (data.title == 'error') {
@@ -61,7 +60,7 @@
                     if (data.title == 'success') {
                         Toast.fire({
                             title: 'Success!',
-                            text: 'Social Media updated successfully',
+                            text: 'Social Media updated',
                             icon: 'success',
                         }).then(() => {
                             window.location.reload();

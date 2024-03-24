@@ -114,7 +114,7 @@ router.get('/lostfound/update/:id/',loggedIn,async(req, res)=>{
 })
 
 router.get('/settings',loggedIn, async (req, res) => {
-    // console.log(req.user)
+    //console.log(req.user.id)
     res.render('dashboard/settings.ejs',{user:req.user});
 });
 
@@ -202,5 +202,42 @@ router.post('/user/settings/security', loggedIn, async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+router.post('/user/settings/socialMedia', loggedIn, async (req, res) => {
+    try {
+        const { facebook, instagram, youtube, linkedin, twitter } = req.body;
+
+        const userId = req.user.id;
+
+        const existingUser = await User.findById(userId);
+
+        if (!existingUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Update user Social Media
+        existingUser.facebook = facebook;
+        existingUser.instagram = instagram;
+        existingUser.youtube = youtube;
+        existingUser.linkedin = linkedin;
+        existingUser.twitter = twitter;
+
+        // Save the updated user social media
+        await existingUser.save();
+
+        const data = {
+            title: 'success',
+            message: 'Social Media updated successfully!',
+        };
+        return res.json(data);
+    } catch (error) {
+        console.error(error);
+        const data = {
+            title: 'error',
+        };
+        return res.status(500).json(data);
+    }
+});
+
 
 module.exports=router;
