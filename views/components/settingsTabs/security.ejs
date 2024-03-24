@@ -15,6 +15,7 @@
                                 <div class="eye-button">
                                     <input type="password" id="cPassword" class="form-control" name="password"
                                         placeholder="Enter your password" />
+                                        <p class="error cPassword-error"></p>
                                     <button type="button" onclick="togglePassWordView(this)" style="background: none;">
                                         <img src="/image/icons/eye-hide.svg" class="eye-hide" alt="">
                                         <img src="/image/icons/eye-show.svg" alt="" class="eye-show"
@@ -27,6 +28,7 @@
                                 <div class="eye-button">
                                     <input type="password" id="newPassword" class="form-control" name="password"
                                         placeholder="Enter your password" />
+                                        <p class="error newPassword-error"></p>
                                     <button type="button" onclick="togglePassWordView(this)" style="background: none;">
                                         <img src="/image/icons/eye-hide.svg" class="eye-hide" alt="">
                                         <img src="/image/icons/eye-show.svg" alt="" class="eye-show"
@@ -40,6 +42,7 @@
                                 <div class="eye-button">
                                     <input type="password" id="confirmPassword" class="form-control" name="password"
                                         placeholder="Enter your password" />
+                                        <p class="error confirmPassword-error"></p>
                                     <button type="button" onclick="togglePassWordView(this)" style="background: none;">
                                         <img src="/image/icons/eye-hide.svg" class="eye-hide" alt="">
                                         <img src="/image/icons/eye-show.svg" alt="" class="eye-show"
@@ -59,8 +62,32 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
+integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/toast.js"></script>
+<script>
 
-    <script>
+function showError(errorElement, errorMessage){
+document.querySelector( "." +errorElement).classList.add("display-error") ;
+document.querySelector( "." +errorElement).innerHTML = errorMessage;
+if(errorElement=="cPassword-error"){
+    document.querySelector("#cPassword").style.border = "1px solid red"
+}else if(errorElement=="newPassword-error"){
+    document.querySelector("#newPassword").style.border = "1px solid red"
+}else if(errorElement=="confirmPassword-error"){
+    document.querySelector("#confirmPassword").style.border = "1px solid red"
+}}
+
+function clearError(){
+    let errors = document.querySelectorAll(".error") ;
+    for (let error of errors){
+    error.classList.remove("display-error") ;
+    document.querySelector("#cPassword").style.border = "1px solid #BECAE3"
+    document.querySelector("#newPassword").style.border = "1px solid #BECAE3"
+    document.querySelector("#confirmPassword").style.border = "1px solid #BECAE3"
+}
+}
         $("#PwchangeBtn").on("click", (e) => {
             e.preventDefault();
             $('#noloading2').hide();
@@ -69,46 +96,56 @@
             var oldpassword = $("#cPassword").val()
             var newpassword = $("#newPassword").val()
             var confirmPassword = $("#confirmPassword").val()
+            clearError();
             if (oldpassword == "" || newpassword == "" || confirmPassword == "") {
                 $("#PwchangeBtn").prop('disabled', false);
                 $('#loading2').hide();
                 $('#noloading2').show();
-                return Toast.fire({
-                    title: 'Error!',
-                    text: 'Please make sure all fields are filled',
-                    icon: 'error',
-                })
+                showError("cPassword-error","Please fill in all fields")
+                showError("newPassword-error","Please fill in all fields")
+                showError("confirmPassword-error","Please fill in all fields")
+                return false;
+            }
+            if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(newpassword)) {
+                $("#PwchangeBtn").prop('disabled', false);
+                $('#loading2').hide();
+                $('#noloading2').show();
+                showError("newPassword-error","Must be 8+ characters, 1 uppercase, 1 lowercase, 1 number")
+                return false;
+            }
+            if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(confirmPassword)) {
+                $("#PwchangeBtn").prop('disabled', false);
+                $('#loading2').hide();
+                $('#noloading2').show();
+                showError("confirmPassword-error","Must be 8+ characters, 1 uppercase, 1 lowercase, 1 number")
+                return false;
             }
 
             if (confirmPassword !== newpassword) {
                 $("#PwchangeBtn").prop('disabled', false);
                 $('#loading2').hide();
                 $('#noloading2').show();
-                return Toast.fire({
-                    title: 'Error!',
-                    text: 'New password didnot match',
-                    icon: 'error',
-                })
+                showError("newPassword-error","password didnot match")
+                showError("confirmPassword-error","password didnot match")
+                return false;
             }
 
-            return fetch('/dashboard/admin/settings/security', {
+            return fetch('/dashboard/user/settings/security', {
                 method: 'POST',
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify({ oldpassword, newpassword })
             }).then(res => res.json(res))
                 .then(data => {
                     console.log(data)
-                    if (data == "Wrgpass") {
+                    if (data.title == "Wrgpass") {
                         $('#PwchangeBtn').prop('disabled', false);
                         $('#loading2').hide();
                         $('#noloading2').show()
-                        return Toast.fire({
-                            title: 'Error!',
-                            text: 'Old password do not match',
-                            icon: 'error',
-                        })
+                        showError("cPassword-error","Old password do not match")
+                        return false;
                     }
-                    if (data == "changesucess") {
+                    if (data.title == "success") {
+                        console.log("data")
                         $('#PwchangeBtn').prop('disabled', false);
                         $('#loading2').show();
                         $('#noloading2').hide();

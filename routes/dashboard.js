@@ -3,6 +3,7 @@ const {uploaduserImages, uploadPetImages}= require('../config/multer');
 const Pet = require('../models/pet')
 const User = require('../models/user')
 var geohash = require('ngeohash');
+const bcrypt = require('bcrypt');
 
 function loggedIn(req,res,next){
     if(req.user){
@@ -162,6 +163,44 @@ router.post('/user/settings/account', loggedIn, uploaduserImages, async (req, re
     }
 });
 
+router.post('/user/settings/security', loggedIn, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
 
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const match = await bcrypt.compare(req.body.oldpassword, user.password);
+
+        if (match) {
+            console.log(req.body);
+            const hash = await bcrypt.hash(req.body.newpassword, 10);
+
+            await User.findByIdAndUpdate(
+                req.user.id,
+                { password: hash }
+            );
+
+            console.log('Updated password successfully');
+            var data = {
+                title: 'success',
+                message: 'User account updated successfully!',
+            };
+            return res.json(data);
+            // return res.json('changesuccess');
+        } else {
+            var data = {
+                title: 'Wrgpass',
+                message: 'User account updated successfully!',
+            };
+            return res.json(data);
+            // return res.json('Wrgpass');
+        }
+    } catch (error) {
+        console.error('Error updating password:', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+})
 
 module.exports=router;
